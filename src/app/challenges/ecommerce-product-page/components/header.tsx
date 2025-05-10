@@ -97,13 +97,14 @@ const Header = () => {
 
         {/* Right side: cart and avatar */}
         <div className="flex items-center space-x-6">
-          <Image src={cart} width={32} height={32} alt="Cart Icon" />
+          {/* Cart Icon (Responsive Sizes) */}
+          <Image src={cart} alt="Cart Icon" className="w-6 h-6 sm:w-8 sm:h-8" />
+
+          {/* Avatar Icon (Responsive Sizes) */}
           <Image
             src={avatar}
-            width={48}
-            height={48}
             alt="User Avatar"
-            className="rounded-full"
+            className="rounded-full w-8 h-8 sm:w-12 sm:h-12"
           />
         </div>
       </header>
