@@ -1,11 +1,18 @@
-import React from 'react'
+import React from "react";
+import Header from "./components/header";
+import Hero from "./components/hero";
 
-type Props = {}
+type Props = {};
 
 const Home = (props: Props) => {
   return (
-    <div>Ecommerce Product Page</div>
-  )
-}
+    <>
+      <div className="">
+        <Header />
+        <Hero />
+      </div>
+    </>
+  );
+};
 
-export default Home
+export default Home;

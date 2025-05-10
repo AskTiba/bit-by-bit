@@ -1,30 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Button } from "../ui/button";
-import { useForm } from "react-hook-form";
-import { Input } from "~/components/ui/input";
+import { Button } from "../../../../components/ui/button";
 
 type Props = {};
 
-type FormData = {
-  firstName: string;
-  lastName: string;
-};
-
 const ReactHooks = (props: Props) => {
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
-
-  const onSubmit = handleSubmit((data) => console.log(data));
-  // firstName and lastName will have correct type
-
   const [count, setCount] = useState<number>(0);
   const countRef = useRef(0);
+  const inputRef = useRef(null);
 
   const handleIncrement = () => {
     setCount((prev) => (prev || 0) + 1);
@@ -100,34 +84,6 @@ const ReactHooks = (props: Props) => {
             Set to 13
           </Button>
         </div>
-      </div>
-
-      <div className="border-2 border-[#3d348b] rounded-md p-4 m-4 shadow-md">
-        <form className="" onSubmit={onSubmit}>
-          <div className="sm:w-1/2 flex flex-col gap-2">
-            <div className="flex flex-col gap-1">
-              <label>First Name</label>
-              <Input
-                className="border-1 border-[#3d348b] rounded-sm py-2 px-1"
-                {...register("firstName")}
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label>Last Name</label>
-              <Input
-                className="border-1 border-[#3d348b] rounded-sm py-2 px-1"
-                {...register("lastName")}
-              />
-            </div>
-            <button
-              type="button"
-              className="bg-[#3d348b] text-white w-full py-2 px-4 rounded-md mt-4"
-              onClick={onSubmit}
-            >
-              Create User
-            </button>
-          </div>
-        </form>
       </div>
     </>
   );
