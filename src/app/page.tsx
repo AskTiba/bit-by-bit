@@ -23,6 +23,12 @@ const Home = () => {
         >
           Testing
         </Link>
+        <Link
+          className="bg-[#3d405b] text-center p-2 rounded-sm"
+          href="./challenges/multi-step-form"
+        >
+          Multi Step Form
+        </Link>
       </div>
     </>
   );

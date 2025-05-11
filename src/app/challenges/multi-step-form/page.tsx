@@ -1,11 +1,16 @@
-import React from 'react'
+import React from "react";
+import Sidebar from "./components/sidebar";
 
-type Props = {}
+type Props = {};
 
 const Home = (props: Props) => {
   return (
-    <div>Home</div>
-  )
-}
+    <>
+      <div className="">
+        <Sidebar />
+      </div>
+    </>
+  );
+};
 
-export default Home
+export default Home;
