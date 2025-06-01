@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import customStepIcon from "./customStepIcon";
+import Steps from "./steps";
 
 const steps = Array.from({ length: 4 }, (_, i) => i);
 
@@ -139,6 +140,7 @@ const Sidebar = (props: Props) => {
             </React.Fragment>
           )}
         </Box>
+        <Steps />
       </div>
     </>
   );
