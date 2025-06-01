@@ -1,148 +1,170 @@
 "use client";
 
-import * as React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import sidebar from "../assets/images/bg-sidebar-mobile.svg";
+import { useForm } from "react-hook-form";
+import Link from "next/link";
 
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+type FormData = {
+  name: string;
+  email: string;
+  number: string;
+};
 
-import customStepIcon from "./customStepIcon";
-import Steps from "./steps";
+const steps = [1, 2, 3, 4];
 
-const steps = Array.from({ length: 4 }, (_, i) => i);
+const StepIndicator = ({
+  steps,
+  activeStep,
+  onClick,
+}: {
+  steps: number[];
+  activeStep: number;
+  onClick: (index: number) => void;
+}) => (
+  <div className="absolute inset-0 z-10 mt-8 w-56 mx-auto flex gap-6 justify-center">
+    {steps.map((step, index) => {
+      const isActive = index === activeStep;
+      return (
+        <button
+          key={index}
+          onClick={() => onClick(index)}
+          aria-pressed={isActive}
+          className={`size-7 rounded-full border-2 flex items-center justify-center font-medium transition-colors duration-300 ${
+            isActive
+              ? "bg-white text-black border-blue-600"
+              : "bg-transparent text-white border-gray-300 hover:bg-white hover:text-black"
+          }`}
+        >
+          {step}
+        </button>
+      );
+    })}
+  </div>
+);
 
-type Props = {};
+const Sidebar = () => {
+  const [activeStep, setActiveStep] = useState<number>(0);
 
-const Sidebar = (props: Props) => {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set<number>());
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
-  const isStepOptional = (step: number) => {
-    return step === 1;
-  };
-
-  const isStepSkipped = (step: number) => {
-    return skipped.has(step);
-  };
-
-  const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  const onSubmit = handleSubmit((data) => {
+    console.log("Form Submitted:", data);
+    setActiveStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
+  });
 
   return (
-    <>
-      <div className="relative">
+    <main className="h-full flex flex-col ">
+      <div className="relative bg-gray-600/40">
+        {/* Background Image */}
         <Image
-          alt="Mountains"
+          alt="Sidebar Background"
           src={sidebar}
-          //   placeholder="blur"
-          quality={100}
+          className="w-full"
+          priority
         />
-      </div>
-      <div className="">
-        <Box sx={{ width: "100%" }}>
-          <div className="absolute inset-0 z-10 mt-8 mx-24">
-            <Stepper activeStep={activeStep}>
-              {steps.map((label, index) => {
-                const stepProps: { completed?: boolean } = {};
-                const labelProps: {
-                  optional?: React.ReactNode;
-                } = {};
-                if (isStepOptional(index)) {
-                  labelProps.optional = (
-                    <Typography variant="caption">Optional</Typography>
-                  );
-                }
-                if (isStepSkipped(index)) {
-                  stepProps.completed = false;
-                }
-                return (
-                  <Step key={label} {...stepProps}>
-                    <StepLabel
-                      StepIconComponent={customStepIcon}
-                      //   {...labelProps}
-                    />
-                  </Step>
-                );
-              })}
-            </Stepper>
-          </div>
 
-          {activeStep === steps.length ? (
-            <React.Fragment>
-              <Typography sx={{ mt: 2, mb: 1 }}>
-                All steps completed - you&apos;re finished
-              </Typography>
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                <Box sx={{ flex: "1 1 auto" }} />
-                <Button onClick={handleReset}>Reset</Button>
-              </Box>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <Typography sx={{ mt: 2, mb: 1 }}>
-                Step {activeStep + 1}
-              </Typography>
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                <Button
-                  color="inherit"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  Back
-                </Button>
-                <Box sx={{ flex: "1 1 auto" }} />
-                {isStepOptional(activeStep) && (
-                  <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                    Skip
-                  </Button>
+        {/* Step Circles */}
+        <StepIndicator
+          steps={steps}
+          activeStep={activeStep}
+          onClick={setActiveStep}
+        />
+
+        {/* Form Content */}
+        <section className="relative z-20 -mt-[75px] mb-10 rounded-xl bg-white mx-3 flex flex-1">
+          <div className="my-7 mx-4 flex flex-col w-full h-full">
+            <h2 className="font-semibold text-xl">Personal Info</h2>
+            <p className="text-gray-500 text-sm mb-4">
+              Please provide your name, email address, and phone number.
+            </p>
+
+            <form onSubmit={onSubmit} className="flex flex-col gap-4">
+              <div>
+                <label htmlFor="name" className="text-sm font-medium">
+                  Full Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="e.g. Stephen King"
+                  {...register("name", { required: "Name is required" })}
+                  className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.name && (
+                  <span className="text-red-500 text-xs">
+                    {errors.name.message}
+                  </span>
                 )}
-                <Button onClick={handleNext}>
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                </Button>
-              </Box>
-            </React.Fragment>
-          )}
-        </Box>
-        <Steps />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="text-sm font-medium">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="e.g. stephenking@lorem.com"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^\S+@\S+$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.email && (
+                  <span className="text-red-500 text-xs">
+                    {errors.email.message}
+                  </span>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="number" className="text-sm font-medium">
+                  Phone Number
+                </label>
+                <input
+                  id="number"
+                  type="tel"
+                  placeholder=" e.g. +1 234 567 890"
+                  {...register("number", {
+                    required: "Phone number is required",
+                    pattern: {
+                      value: /^[0-9]{7,14}$/,
+                      message: "Enter a valid phone number",
+                    },
+                  })}
+                  className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.number && (
+                  <span className="text-red-500 text-xs">
+                    {errors.number.message}
+                  </span>
+                )}
+              </div>
+            </form>
+          </div>
+        </section>
       </div>
-    </>
+
+      {/* Simulated Next Link */}
+      <div className="flex self-end">
+        <button
+          type="submit"
+          className="m-4 px-4 py-2 bg-blue-600 text-white rounded-sm transition cursor-pointer flex self-end "
+        >
+          Next Step
+        </button>
+      </div>
+    </main>
   );
 };
 
