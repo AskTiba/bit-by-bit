@@ -6,7 +6,6 @@ import { Button } from "../../../../components/ui/button";
 const ReactHooks = () => {
   const [count, setCount] = useState<number>(0);
   const countRef = useRef(0);
-  const inputRef = useRef(null);
 
   const handleIncrement = () => {
     setCount((prev) => (prev || 0) + 1);

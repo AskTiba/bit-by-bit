@@ -75,7 +75,7 @@ const Sidebar = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = () => {
     if (activeStep < steps.length) {
       setActiveStep((prev) => prev + 1);
     }
