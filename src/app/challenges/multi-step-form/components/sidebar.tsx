@@ -9,6 +9,7 @@ import PersonalInfo from "./personalInfo"; // This one already exists
 import AddOns from "./add-ons";
 import Finishing from "./finishing";
 import Plan from "./plan";
+import Addons from "./add-ons";
 
 type FormData = {
   name: string;
@@ -50,6 +51,7 @@ const StepIndicator = ({
 
 const Sidebar = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [isYearly, setIsYearly] = useState<boolean>(false); // 👈 toggle state
 
   const {
     register,
@@ -71,9 +73,10 @@ const Sidebar = () => {
       case 0:
         return <PersonalInfo register={register} errors={errors} />;
       case 1:
-        return <Plan />;
+        return <Plan isYearly={isYearly} setIsYearly={setIsYearly} />;
       case 2:
-        return <AddOns />;
+        return <Addons isYearly={isYearly} />;
+
       case 3:
         return <Finishing />;
       default:

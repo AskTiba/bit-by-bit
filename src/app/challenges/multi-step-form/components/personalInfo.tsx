@@ -14,7 +14,7 @@ type Props = {
 
 const PersonalInfo = ({ register, errors }: Props) => {
   return (
-    <section className="relative z-20 -mt-[75px] mb-10 rounded-xl text-black bg-white mx-3 flex flex-1">
+    <section className="relative z-20 -mt-[75px] mb-10 rounded-xl text-black bg-white flex flex-1">
       <div className="my-7 mx-4 flex flex-col w-full h-full">
         <h2 className="font-semibold text-xl">Personal Info</h2>
         <p className="text-gray-500 text-sm mb-4">
