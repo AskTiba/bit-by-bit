@@ -6,7 +6,7 @@ type PlanData = {
   name: string;
   price: string;
   promoText?: string;
-  icon: any;
+  icon: string;
 };
 
 export const monthlyPlans: PlanData[] = [

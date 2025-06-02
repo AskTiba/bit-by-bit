@@ -2,9 +2,7 @@ import React from "react";
 import Header from "./components/header";
 import Hero from "./components/hero";
 
-type Props = {};
-
-const Home = (props: Props) => {
+const Home = () => {
   return (
     <>
       <div className="">

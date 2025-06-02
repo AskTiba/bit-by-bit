@@ -1,13 +1,9 @@
 import React from "react";
 
-type Props = {};
-
-const Hero = (props: Props) => {
+const Hero = () => {
   return (
     <>
-      <div className="bg-pink-500">
-        
-      </div>
+      <div className="bg-pink-500"></div>
     </>
   );
 };

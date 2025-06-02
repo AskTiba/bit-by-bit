@@ -1,18 +1,13 @@
 import React from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
+import { FormData } from "../lib/types/formData";
 
-type FormData = {
-  name: string;
-  email: string;
-  number: string;
-};
-
-type Props = {
+interface PersonalInfoProps {
   register: UseFormRegister<FormData>;
   errors: FieldErrors<FormData>;
-};
+}
 
-const PersonalInfo = ({ register, errors }: Props) => {
+const PersonalInfo = ({ register, errors }: PersonalInfoProps) => {
   return (
     <section className="relative z-20 -mt-[75px] mb-10 rounded-xl text-black bg-white flex flex-1">
       <div className="my-7 mx-4 flex flex-col w-full h-full">

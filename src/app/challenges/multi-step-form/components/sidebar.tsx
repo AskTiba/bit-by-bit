@@ -1,3 +1,4 @@
+// components/Sidebar.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -12,13 +13,10 @@ import Addons from "./add-ons";
 import Finishing from "./finishing";
 import Appreciation from "./apreciation";
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-}
+// Import shared FormData interface
+import { FormData } from "../lib/types/formData";
 
-const steps = [1, 2, 3, 4]; // Step 5 (Appreciation) is not shown in indicator
+const steps = [1, 2, 3, 4];
 
 const StepIndicator = ({
   steps,
