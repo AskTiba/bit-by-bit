@@ -1,23 +1,24 @@
-// Sidebar.tsx
 "use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
 import sidebar from "../assets/images/bg-sidebar-mobile.svg";
 import { useForm, SubmitHandler } from "react-hook-form";
-import PersonalInfo from "./personalInfo"; // This one already exists
-import AddOns from "./add-ons";
-import Finishing from "./finishing";
+
+// Step Components
+import PersonalInfo from "./personalInfo";
 import Plan from "./plan";
 import Addons from "./add-ons";
+import Finishing from "./finishing";
+import Appreciation from "./apreciation";
 
-type FormData = {
+interface FormData {
   name: string;
   email: string;
-  number: string;
-};
+  phone: string;
+}
 
-const steps = [1, 2, 3, 4];
+const steps = [1, 2, 3, 4]; // Step 5 (Appreciation) is not shown in indicator
 
 const StepIndicator = ({
   steps,
@@ -51,22 +52,13 @@ const StepIndicator = ({
 
 const Sidebar = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [isYearly, setIsYearly] = useState<boolean>(false); // 👈 toggle state
+  const [isYearly, setIsYearly] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Form Submitted:", data);
-    if (activeStep < steps.length - 1) {
-      setActiveStep((prev) => prev + 1);
-    } else {
-      alert("Final submission logic goes here.");
-    }
-  };
 
   const renderStepContent = () => {
     switch (activeStep) {
@@ -76,26 +68,37 @@ const Sidebar = () => {
         return <Plan isYearly={isYearly} setIsYearly={setIsYearly} />;
       case 2:
         return <Addons isYearly={isYearly} />;
-
       case 3:
         return <Finishing />;
+      case 4:
+        return <Appreciation />;
       default:
         return null;
     }
   };
 
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    if (activeStep < steps.length) {
+      setActiveStep((prev) => prev + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (activeStep > 0 && activeStep <= steps.length) {
+      setActiveStep((prev) => prev - 1);
+    }
+  };
+
   return (
     <main className="h-full flex flex-col bg-slate-900 text-white min-h-screen">
+      {/* Sidebar Image & Step Circles */}
       <div className="relative bg-gray-600/40">
-        {/* Sidebar Background Image */}
         <Image
           alt="Sidebar Background"
           src={sidebar}
           className="w-full object-cover"
           priority
         />
-
-        {/* Step Circles */}
         <StepIndicator
           steps={steps}
           activeStep={activeStep}
@@ -103,21 +106,53 @@ const Sidebar = () => {
         />
       </div>
 
-      {/* Form Body */}
+      {/* Main Form Logic */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex-grow px-4 flex flex-col justify-between"
       >
-        <div>{renderStepContent()}</div>
+        {/* Step Content */}
+        <div className="">{renderStepContent()}</div>
 
-        {/* Navigation Button */}
-        <div className="mt-10 flex justify-end my-4">
-          <button
-            type="submit"
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition duration-300"
-          >
-            {activeStep === steps.length - 1 ? "Submit" : "Next Step"}
-          </button>
+        {/* Navigation Buttons */}
+        <div className="mt-10 flex justify-between items-center my-4">
+          {/* Go Back */}
+          {activeStep > 0 && activeStep < steps.length + 1 && (
+            <button
+              type="button"
+              onClick={handleBack}
+              className="px-4 py-2 bg-transparent border border-gray-400 text-white rounded-md hover:bg-gray-700 transition"
+            >
+              Go Back
+            </button>
+          )}
+
+          {/* Next / Confirm / Final */}
+          <div className="ml-auto">
+            {activeStep < steps.length - 1 && (
+              <button
+                type="submit"
+                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition duration-300"
+              >
+                Next Step
+              </button>
+            )}
+
+            {activeStep === steps.length - 1 && (
+              <button
+                type="submit"
+                className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-md transition duration-300"
+              >
+                Confirm
+              </button>
+            )}
+
+            {activeStep === steps.length && (
+              <div className="text-sm text-gray-400 italic">
+                🎉 Thank you! You're all set.
+              </div>
+            )}
+          </div>
         </div>
       </form>
     </main>
