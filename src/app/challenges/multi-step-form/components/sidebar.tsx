@@ -1,10 +1,14 @@
+// Sidebar.tsx
 "use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
 import sidebar from "../assets/images/bg-sidebar-mobile.svg";
 import { useForm, SubmitHandler } from "react-hook-form";
-import PersonalInfo from "./personalInfo";
+import PersonalInfo from "./personalInfo"; // This one already exists
+import AddOns from "./add-ons";
+import Finishing from "./finishing";
+import Plan from "./plan";
 
 type FormData = {
   name: string;
@@ -57,17 +61,34 @@ const Sidebar = () => {
     console.log("Form Submitted:", data);
     if (activeStep < steps.length - 1) {
       setActiveStep((prev) => prev + 1);
+    } else {
+      alert("Final submission logic goes here.");
+    }
+  };
+
+  const renderStepContent = () => {
+    switch (activeStep) {
+      case 0:
+        return <PersonalInfo register={register} errors={errors} />;
+      case 1:
+        return <Plan />;
+      case 2:
+        return <AddOns />;
+      case 3:
+        return <Finishing />;
+      default:
+        return null;
     }
   };
 
   return (
-    <main className="h-full flex flex-col">
+    <main className="h-full flex flex-col bg-slate-900 text-white min-h-screen">
       <div className="relative bg-gray-600/40">
-        {/* Background Image */}
+        {/* Sidebar Background Image */}
         <Image
           alt="Sidebar Background"
           src={sidebar}
-          className="w-full"
+          className="w-full object-cover"
           priority
         />
 
@@ -77,25 +98,25 @@ const Sidebar = () => {
           activeStep={activeStep}
           onClick={setActiveStep}
         />
-
-        {/* Step Content */}
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {activeStep === 0 && (
-            <PersonalInfo register={register} errors={errors} />
-          )}
-
-          {/* More steps go here with similar structure */}
-        </form>
       </div>
-      {/* Button inside the form to ensure submit works */}
-      <div className="flex justify-end px-4 pb-4 my-10">
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded-sm"
-        >
-          {activeStep === steps.length - 1 ? "Submit" : "Next Step"}
-        </button>
-      </div>
+
+      {/* Form Body */}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex-grow px-4 flex flex-col justify-between"
+      >
+        <div>{renderStepContent()}</div>
+
+        {/* Navigation Button */}
+        <div className="mt-10 flex justify-end my-4">
+          <button
+            type="submit"
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition duration-300"
+          >
+            {activeStep === steps.length - 1 ? "Submit" : "Next Step"}
+          </button>
+        </div>
+      </form>
     </main>
   );
 };

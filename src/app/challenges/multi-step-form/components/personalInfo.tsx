@@ -14,11 +14,11 @@ type Props = {
 
 const PersonalInfo = ({ register, errors }: Props) => {
   return (
-    <section className="relative z-20 -mt-[75px] mb-10 rounded-xl bg-white mx-3 flex flex-1">
+    <section className="relative z-20 -mt-[75px] mb-10 rounded-xl text-black bg-white mx-3 flex flex-1">
       <div className="my-7 mx-4 flex flex-col w-full h-full">
         <h2 className="font-semibold text-xl">Personal Info</h2>
         <p className="text-gray-500 text-sm mb-4">
-          Please provide your name, email address, and phone number.
+          Please provide your name, email address, and phone number dffdfdfdfdf.
         </p>
 
         <div className="flex flex-col gap-4">
