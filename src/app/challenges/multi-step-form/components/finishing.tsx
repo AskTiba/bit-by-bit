@@ -1,8 +1,6 @@
 import React from "react";
 
-type Props = {};
-
-const Finishing = (props: Props) => {
+const Finishing = () => {
   return (
     <main className="relative z-20 -mt-[75px] mb-10 bg-white text-black rounded-xl shadow-md flex-1">
       <div className="p-6 flex flex-col gap-6 w-full">

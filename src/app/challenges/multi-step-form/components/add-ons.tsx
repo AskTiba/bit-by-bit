@@ -8,7 +8,7 @@ type AddonsProps = {
   isYearly: boolean;
 };
 
-const Addons: React.FC<AddonsProps> = ({ isYearly }) => {
+const Addons = ({ isYearly }: AddonsProps) => {
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
 
   const handleToggle = (addonName: string) => {

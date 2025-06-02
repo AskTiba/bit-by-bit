@@ -1,9 +1,7 @@
 import React from "react";
 import Sidebar from "./components/sidebar";
 
-type Props = {};
-
-const Home = (props: Props) => {
+const Home = () => {
   return (
     <>
       <div className="">

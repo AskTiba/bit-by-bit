@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+const Home = () => {
+  return <div>Expense Tracker</div>;
+};
 
-const Home = (props: Props) => {
-  return (
-    <div>Expense Tracker</div>
-  )
-}
-
-export default Home
+export default Home;

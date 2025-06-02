@@ -2,9 +2,7 @@ import React from "react";
 import Image from "next/image";
 import checkmark from "../assets/images/icon-thank-you.svg";
 
-type Props = {};
-
-const apreciation = (props: Props) => {
+const apreciation = () => {
   return (
     <main className="relative z-20 -mt-[75px] mb-10 bg-white text-black rounded-xl shadow-md flex-1">
       <div className="p-6 flex flex-col items-center justify-center gap-6 w-full">

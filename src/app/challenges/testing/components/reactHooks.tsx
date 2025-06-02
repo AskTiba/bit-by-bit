@@ -3,9 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../../../../components/ui/button";
 
-type Props = {};
-
-const ReactHooks = (props: Props) => {
+const ReactHooks = () => {
   const [count, setCount] = useState<number>(0);
   const countRef = useRef(0);
   const inputRef = useRef(null);
