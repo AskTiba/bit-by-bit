@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import sidebar from "../assets/images/bg-sidebar-mobile.svg";
-import { useForm } from "react-hook-form";
-import Link from "next/link";
+import { useForm, SubmitHandler } from "react-hook-form";
+import PersonalInfo from "./personalInfo";
 
 type FormData = {
   name: string;
@@ -45,7 +45,7 @@ const StepIndicator = ({
 );
 
 const Sidebar = () => {
-  const [activeStep, setActiveStep] = useState<number>(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   const {
     register,
@@ -53,13 +53,15 @@ const Sidebar = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log("Form Submitted:", data);
-    setActiveStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
-  });
+    if (activeStep < steps.length - 1) {
+      setActiveStep((prev) => prev + 1);
+    }
+  };
 
   return (
-    <main className="h-full flex flex-col ">
+    <main className="h-full flex flex-col">
       <div className="relative bg-gray-600/40">
         {/* Background Image */}
         <Image
@@ -76,92 +78,22 @@ const Sidebar = () => {
           onClick={setActiveStep}
         />
 
-        {/* Form Content */}
-        <section className="relative z-20 -mt-[75px] mb-10 rounded-xl bg-white mx-3 flex flex-1">
-          <div className="my-7 mx-4 flex flex-col w-full h-full">
-            <h2 className="font-semibold text-xl">Personal Info</h2>
-            <p className="text-gray-500 text-sm mb-4">
-              Please provide your name, email address, and phone number.
-            </p>
+        {/* Step Content */}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {activeStep === 0 && (
+            <PersonalInfo register={register} errors={errors} />
+          )}
 
-            <form onSubmit={onSubmit} className="flex flex-col gap-4">
-              <div>
-                <label htmlFor="name" className="text-sm font-medium">
-                  Full Name
-                </label>
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="e.g. Stephen King"
-                  {...register("name", { required: "Name is required" })}
-                  className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {errors.name && (
-                  <span className="text-red-500 text-xs">
-                    {errors.name.message}
-                  </span>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="email" className="text-sm font-medium">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="e.g. stephenking@lorem.com"
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^\S+@\S+$/i,
-                      message: "Invalid email address",
-                    },
-                  })}
-                  className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {errors.email && (
-                  <span className="text-red-500 text-xs">
-                    {errors.email.message}
-                  </span>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="number" className="text-sm font-medium">
-                  Phone Number
-                </label>
-                <input
-                  id="number"
-                  type="tel"
-                  placeholder=" e.g. +1 234 567 890"
-                  {...register("number", {
-                    required: "Phone number is required",
-                    pattern: {
-                      value: /^[0-9]{7,14}$/,
-                      message: "Enter a valid phone number",
-                    },
-                  })}
-                  className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {errors.number && (
-                  <span className="text-red-500 text-xs">
-                    {errors.number.message}
-                  </span>
-                )}
-              </div>
-            </form>
-          </div>
-        </section>
+          {/* More steps go here with similar structure */}
+        </form>
       </div>
-
-      {/* Simulated Next Link */}
-      <div className="flex self-end">
+      {/* Button inside the form to ensure submit works */}
+      <div className="flex justify-end px-4 pb-4 my-10">
         <button
           type="submit"
-          className="m-4 px-4 py-2 bg-blue-600 text-white rounded-sm transition cursor-pointer flex self-end "
+          className="px-4 py-2 bg-blue-600 text-white rounded-sm"
         >
-          Next Step
+          {activeStep === steps.length - 1 ? "Submit" : "Next Step"}
         </button>
       </div>
     </main>
