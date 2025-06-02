@@ -1,12 +1,13 @@
 import arcadeIcon from "../assets/images/icon-arcade.svg";
 import advancedIcon from "../assets/images/icon-advanced.svg";
 import proIcon from "../assets/images/icon-pro.svg";
+import { StaticImageData } from "next/image";
 
 type PlanData = {
   name: string;
   price: string;
   promoText?: string;
-  icon: string;
+  icon: StaticImageData;
 };
 
 export const monthlyPlans: PlanData[] = [
