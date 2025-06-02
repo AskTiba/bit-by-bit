@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { Button } from "../../../../components/ui/button";
 import { useForm } from "react-hook-form";
 import { Input } from "~/components/ui/input";
 
@@ -11,13 +10,7 @@ type FormData = {
 };
 
 const RefHook = () => {
-  const {
-    register,
-    setValue,
-    setFocus,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
+  const { register, setFocus, handleSubmit } = useForm<FormData>();
 
   const onSubmit = handleSubmit((data) => console.log(data));
   // firstName and lastName will have correct type

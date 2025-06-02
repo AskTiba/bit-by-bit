@@ -147,7 +147,7 @@ const Sidebar = () => {
 
             {activeStep === steps.length && (
               <div className="text-sm text-gray-400 italic">
-                🎉 Thank you! You're all set.
+                <p className=""> 🎉 Thank you! You are all set.</p>
               </div>
             )}
           </div>
