@@ -4,6 +4,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import sidebar from "../assets/images/bg-sidebar-mobile.svg";
+import desktop_sidebar from "../assets/images/bg-sidebar-desktop.svg";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 
 // Step Components
@@ -27,7 +29,7 @@ const StepIndicator = ({
   activeStep: number;
   onClick: (index: number) => void;
 }) => (
-  <div className="absolute inset-0 z-10 mt-8 w-56 mx-auto flex gap-6 justify-center">
+  <div className="absolute inset-0 lg:mt-20 z-10 mt-8 w-56 mx-auto lg:flex-col lg:gap-10 flex gap-6 justify-center lg:justify-start">
     {steps.map((step, index) => {
       const isActive = index === activeStep;
       return (
@@ -88,13 +90,19 @@ const Sidebar = () => {
   };
 
   return (
-    <main className="h-full flex flex-col bg-slate-900 text-white min-h-screen">
+    <main className="h-full lg:h-screen flex flex-col lg:flex-row bg-slate-900 lg:bg-blue-300 text-white">
       {/* Sidebar Image & Step Circles */}
-      <div className="relative bg-gray-600/40">
+      <div className="relative lg:p-4 bg-gray-600/40 flex">
         <Image
           alt="Sidebar Background"
           src={sidebar}
-          className="w-full object-cover"
+          className="w-full object-cover lg:hidden lg:m-4"
+          priority
+        />
+        <Image
+          alt="Sidebar Background"
+          src={desktop_sidebar}
+          className="hidden lg:flex "
           priority
         />
         <StepIndicator
@@ -107,10 +115,10 @@ const Sidebar = () => {
       {/* Main Form Logic */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex-grow px-4 flex flex-col justify-between"
+        className="flex-grow lg:p-10 px-4 flex flex-col justify-between "
       >
         {/* Step Content */}
-        <div className="">{renderStepContent()}</div>
+        <div className="lg:py-20">{renderStepContent()}</div>
 
         {/* Navigation Buttons */}
         <div className="mt-10 flex justify-between items-center my-4">

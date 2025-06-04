@@ -9,23 +9,24 @@ The designs were created to the following widths:
 
 > 💡 These are just the design sizes. Ensure content is responsive and meets WCAG requirements by testing the full range of screen sizes from 320px to large screens.
 
-## Colors
+## 🎨 Color System
 
-### Primary
+### Primary Colors
 
-- Blue 950: hsl(213, 96%, 18%)
-- Purple 600: hsl(243, 100%, 62%)
-- Blue 300: hsl(228, 100%, 84%)
-- Blue 200: hsl(206, 94%, 87%)
-- Red 500: hsl(354, 84%, 57%)
+| Name       | Tailwind Class         | HSL                 |
+| ---------- | ---------------------- | ------------------- |
+| Blue 950   | `bg-primary-blue950`   | hsl(213, 96%, 18%)  |
+| Purple 600 | `bg-primary-purple600` | hsl(243, 100%, 62%) |
+| Blue 300   | `bg-primary-blue300`   | hsl(228, 100%, 84%) |
 
-### Neutral
+### Neutral Colors
 
-- Grey 500: hsl(231, 11%, 63%)
-- Purple 200: hsl(229, 24%, 87%)
-- Blue 100: hsl(218, 100%, 97%)
-- Blue 50: hsl(231, 100%, 99%)
-- White: hsl(0, 100%, 100%)
+| Name       | Tailwind Class         | HSL                 |
+| ---------- | ---------------------- | ------------------- |
+| Grey 500   | `text-neutral-grey500` | hsl(231, 11%, 63%)  |
+| Purple 200 | `bg-neutral-purple200` | hsl(229, 24%, 87%)  |
+| Blue 100   | `bg-neutral-blue100`   | hsl(218, 100%, 97%) |
+| White      | `text-neutral-white`   | hsl(0, 100%, 100%)  |
 
 ## Typography
 
