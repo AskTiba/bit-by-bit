@@ -13,7 +13,7 @@ const Naught = (props: SVGProps<SVGSVGElement>) => (
     className="lucide lucide-circle-icon lucide-circle"
     {...props}
   >
-    <circle cx={12} cy={12} r={10} />
+    <circle cx={12} cy={12} r={9} />
   </svg>
 );
 export default Naught;

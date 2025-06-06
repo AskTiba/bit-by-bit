@@ -3,6 +3,7 @@
 import React, { JSX, useState } from "react";
 import Cross from "./components/Cross";
 import Naught from "./components/Naught";
+import Redo from "./components/Redo";
 
 const squares = Array.from({ length: 9 }, (_, i) => i + 1); // valid 1-9
 
@@ -17,9 +18,13 @@ const TicTacToe = () => {
 
     const updatedBoard = [...board];
     updatedBoard[index] = xIsNext ? (
-      <Cross color="#ffd700" />
+      <div className="">
+        <Cross color="#a2d2ff" />
+      </div>
     ) : (
-      <Naught color="#ffd700" />
+      <div className="">
+        <Naught color="#ffd700" />
+      </div>
     );
 
     setBoard(updatedBoard);
@@ -32,21 +37,31 @@ const TicTacToe = () => {
       <section className="grid grid-cols-3 text-sm font-semibold gap-6 mb-3">
         <button
           type="button"
-          className="w-20 bg-green-300 rounded-sm flex items-center"
+          className="w-20 bg-[#403d39] rounded-sm flex items-center gap-1 justify-center"
         >
-          <Cross />
-          <Naught width={8} />
-        </button>
-        <button type="button" className="w-20 bg-white rounded-sm text-center">
-          <h3>X(YOU)</h3>
-          <span>14</span>
+          <div className="">
+            <Cross color="#a2d2ff" />
+          </div>
+          <div className="">
+            <Naught color="#ffd700" />
+          </div>
         </button>
         <button
           type="button"
-          className="w-20 bg-amber-300 rounded-sm text-center"
+          className="w-20 bg-[#403d39] rounded-sm text-center flex items-center gap-1 justify-center"
         >
-          <h3>X(YOU)</h3>
-          <span>14</span>
+          <div className="">
+            <Naught color="#ffd700" />
+          </div>
+          <span className="text-[#96abb5] ">TURN</span>
+        </button>
+        <button
+          type="button"
+          className="w-20 bg-[#96abb5] inline-flex rounded-sm justify-center items-center place-items-end"
+        >
+          <div className="py-2">
+            <Redo width={20} height={20} strokeWidth={10} />
+          </div>
         </button>
       </section>
 
@@ -68,14 +83,14 @@ const TicTacToe = () => {
       <section className="grid grid-cols-3 text-sm font-semibold gap-6 mt-3">
         <button
           type="button"
-          className="w-20 px-5 py-1 bg-green-300 rounded-sm text-center"
+          className="w-20 px-5 py-1 bg-[#a2d2ff] rounded-sm text-center"
         >
           <h3>X(YOU)</h3>
           <span>14</span>
         </button>
         <button
           type="button"
-          className="w-20 px-5 py-1 bg-white rounded-sm text-center"
+          className="w-20 px-5 py-1 bg-[#96abb5] rounded-sm text-center"
         >
           <h3>X(YOU)</h3>
           <span>14</span>
