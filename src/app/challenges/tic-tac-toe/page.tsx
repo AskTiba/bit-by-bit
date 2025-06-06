@@ -2,6 +2,7 @@
 
 import React, { JSX, useState } from "react";
 import Cross from "./components/Cross";
+import Naught from "./components/Naught";
 
 type Props = {};
 
@@ -12,7 +13,8 @@ const TicTacToe = (props: Props) => {
   const [board, setBoard] = useState<(JSX.Element | null)[]>(
     Array(9).fill(null)
   );
-  const [likes, setLikes] = React.useState(0);
+  const [likes, setLikes] = useState(0);
+  const [xIsNext, setXIsNext] = useState(true);
 
   // Update specific square with "X" when clicked
   const handlePlay = (index: number) => {
@@ -20,8 +22,14 @@ const TicTacToe = (props: Props) => {
     if (board[index]) return;
 
     const updatedBoard = [...board]; // create a copy
-    updatedBoard[index] = <Cross color="#ffd700" />; // mark clicked square
+    if (xIsNext) {
+      updatedBoard[index] = <Cross color="#ffd700" />; // mark clicked square
+    } else {
+      updatedBoard[index] = <Naught color="#ffd700" />; // mark clicked square
+    }
+
     setBoard(updatedBoard); // update state
+    setXIsNext(!xIsNext);
   };
 
   function handleLikes() {
