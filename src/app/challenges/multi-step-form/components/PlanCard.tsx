@@ -23,7 +23,7 @@ export const PlanCard = ({
     <div
       onClick={onClick}
       className={clsx(
-        "cursor-pointer p-4 flex gap-4 rounded-md",
+        "cursor-pointer p-4 flex lg:flex-col gap-4 rounded-md",
         "hover:border-purple-700 hover:ring-1 hover:ring-purple-300",
         isActive
           ? "border-purple-900 border-2 ring-2 ring-purple-300"

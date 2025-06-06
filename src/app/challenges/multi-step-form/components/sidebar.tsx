@@ -5,54 +5,18 @@ import React, { useState } from "react";
 import Image from "next/image";
 import sidebar from "../assets/images/bg-sidebar-mobile.svg";
 import desktop_sidebar from "../assets/images/bg-sidebar-desktop.svg";
-
 import { useForm, SubmitHandler } from "react-hook-form";
 
-// Step Components
-import PersonalInfo from "./personalInfo";
-import Plan from "./plan";
-import Addons from "./add-ons";
-import Finishing from "./finishing";
-import Appreciation from "./apreciation";
-
-// Import shared FormData interface
+import StepIndicator from "./StepIndicator";
+import StepContent from "./StepContent";
+import NavigationButtons from "./NavigationButtons";
 import { FormData } from "../lib/types/formData";
 
 const steps = [1, 2, 3, 4];
 
-const StepIndicator = ({
-  steps,
-  activeStep,
-  onClick,
-}: {
-  steps: number[];
-  activeStep: number;
-  onClick: (index: number) => void;
-}) => (
-  <div className="absolute inset-0 lg:mt-20 z-10 mt-8 w-56 mx-auto lg:flex-col lg:gap-10 flex gap-6 justify-center lg:justify-start">
-    {steps.map((step, index) => {
-      const isActive = index === activeStep;
-      return (
-        <button
-          key={index}
-          onClick={() => onClick(index)}
-          aria-pressed={isActive}
-          className={`size-7 rounded-full border-2 flex items-center justify-center font-medium transition-colors duration-300 ${
-            isActive
-              ? "bg-white text-black border-blue-600"
-              : "bg-transparent text-white border-gray-300 hover:bg-white hover:text-black"
-          }`}
-        >
-          {step}
-        </button>
-      );
-    })}
-  </div>
-);
-
-const Sidebar = () => {
-  const [activeStep, setActiveStep] = useState(0);
-  const [isYearly, setIsYearly] = useState<boolean>(false);
+const Sidebar: React.FC = () => {
+  const [activeStep, setActiveStep] = useState<number>(0); // Tracks current step
+  const [isYearly, setIsYearly] = useState<boolean>(false); // Toggles plan type
 
   const {
     register,
@@ -60,108 +24,66 @@ const Sidebar = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const renderStepContent = () => {
-    switch (activeStep) {
-      case 0:
-        return <PersonalInfo register={register} errors={errors} />;
-      case 1:
-        return <Plan isYearly={isYearly} setIsYearly={setIsYearly} />;
-      case 2:
-        return <Addons isYearly={isYearly} />;
-      case 3:
-        return <Finishing />;
-      case 4:
-        return <Appreciation />;
-      default:
-        return null;
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    if (activeStep < steps.length) {
+      setActiveStep((prev) => prev + 1);
+    } else {
+      console.log("🎉 Form submitted:", data);
     }
   };
 
-  const onSubmit: SubmitHandler<FormData> = () => {
-    if (activeStep < steps.length) {
-      setActiveStep((prev) => prev + 1);
+  const handleStepClick = (index: number) => {
+    if (index <= activeStep) {
+      setActiveStep(index);
     }
   };
 
   const handleBack = () => {
-    if (activeStep > 0 && activeStep <= steps.length) {
-      setActiveStep((prev) => prev - 1);
-    }
+    setActiveStep((prev) => Math.max(prev - 1, 0));
   };
 
   return (
-    <main className="h-full lg:h-screen flex flex-col lg:flex-row bg-slate-900 lg:bg-blue-300 text-white">
-      {/* Sidebar Image & Step Circles */}
-      <div className="relative lg:p-4 bg-gray-600/40 flex">
+    <section className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[1fr_auto] max-h-screen w-full bg-gray-100">
+      {/* Sidebar Image */}
+      <div className="relative w-full">
         <Image
-          alt="Sidebar Background"
-          src={sidebar}
-          className="w-full object-cover lg:hidden lg:m-4"
-          priority
-        />
-        <Image
-          alt="Sidebar Background"
           src={desktop_sidebar}
-          className="hidden lg:flex "
-          priority
+          alt="Sidebar background"
+          className="hidden lg:flex rounded-xl"
         />
+        <Image
+          src={sidebar}
+          alt="Sidebar background mobile"
+          className="block lg:hidden w-full"
+        />
+        {/* Step indicators */}
         <StepIndicator
           steps={steps}
           activeStep={activeStep}
-          onClick={setActiveStep}
+          onStepClick={handleStepClick}
         />
       </div>
 
-      {/* Main Form Logic */}
+      {/* Step Content and Navigation */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex-grow lg:p-10 px-4 flex flex-col justify-between "
+        className="col-span-2 grid grid-rows-[1fr_auto] gap-6 bg-green-200 rounded-xl shadow-md"
       >
-        {/* Step Content */}
-        <div className="lg:py-20">{renderStepContent()}</div>
+        <StepContent
+          activeStep={activeStep}
+          isYearly={isYearly}
+          setIsYearly={setIsYearly}
+          register={register}
+          errors={errors}
+        />
 
-        {/* Navigation Buttons */}
-        <div className="mt-10 flex justify-between items-center my-4">
-          {/* Go Back */}
-          {activeStep > 0 && activeStep < steps.length + 1 && (
-            <button
-              type="button"
-              onClick={handleBack}
-              className="px-4 py-2 bg-transparent border border-gray-400 text-white rounded-md hover:bg-gray-700 transition"
-            >
-              Go Back
-            </button>
-          )}
-
-          {/* Next / Confirm / Final */}
-          <div className="ml-auto">
-            {activeStep < steps.length - 1 && (
-              <button
-                type="submit"
-                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition duration-300"
-              >
-                Next Step
-              </button>
-            )}
-
-            {activeStep === steps.length - 1 && (
-              <button
-                type="submit"
-                className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-md transition duration-300"
-              >
-                Confirm
-              </button>
-            )}
-
-            {activeStep === steps.length && (
-              <div className="text-sm text-gray-400 italic">
-                <p className=""> 🎉 Thank you! You are all set.</p>
-              </div>
-            )}
-          </div>
-        </div>
+        <NavigationButtons
+          activeStep={activeStep}
+          stepsLength={steps.length}
+          onBack={handleBack}
+        />
       </form>
-    </main>
+    </section>
   );
 };
 

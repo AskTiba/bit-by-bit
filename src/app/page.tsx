@@ -29,6 +29,12 @@ const Home = () => {
         >
           Multi Step Form
         </Link>
+        <Link
+          className="bg-[#6f1d1b] text-center p-2 rounded-sm"
+          href="./challenges/tic-tac-toe"
+        >
+          Tick Toc Toe
+        </Link>
       </div>
     </>
   );

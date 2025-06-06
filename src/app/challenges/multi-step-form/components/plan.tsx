@@ -18,7 +18,7 @@ const Plan = ({ isYearly, setIsYearly }: PlanProps) => {
 
   return (
     <>
-      <main className="relative z-20 -mt-[75px] mb-10 bg-white text-black rounded-xl shadow-md flex-1">
+      <main className="">
         <div className="p-6 flex flex-col gap-6 w-full">
           <div>
             <h2 className="text-xl font-semibold">Select your plan</h2>
@@ -27,7 +27,7 @@ const Plan = ({ isYearly, setIsYearly }: PlanProps) => {
             </p>
           </div>
 
-          <section className="flex flex-col gap-3">
+          <section className="flex flex-col lg:flex-row gap-3">
             {currentPlans.map((plan) => (
               <PlanCard
                 key={plan.name}

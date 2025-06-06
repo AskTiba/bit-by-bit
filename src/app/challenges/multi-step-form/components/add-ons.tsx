@@ -20,7 +20,7 @@ const Addons = ({ isYearly }: AddonsProps) => {
   };
 
   return (
-    <main className="relative z-20 -mt-[75px] mb-10 bg-white text-black rounded-xl shadow-md flex-1">
+    <main className="">
       <div className="p-6 flex flex-col gap-6 w-full">
         <div>
           <h2 className="text-xl font-semibold">Pick add-ons</h2>
@@ -37,13 +37,13 @@ const Addons = ({ isYearly }: AddonsProps) => {
               <div
                 key={addon.name}
                 onClick={() => handleToggle(addon.name)}
-                className={`flex items-center justify-between border rounded-sm p-3 cursor-pointer transition-colors duration-200 ${
+                className={`flex items-center justify-between w-full border rounded-sm p-3 cursor-pointer transition-colors duration-200 ${
                   isSelected
                     ? "border-purple-600 bg-purple-100"
                     : "border-gray-300 hover:bg-gray-100"
                 }`}
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 ">
                   <div
                     onClick={(e) => e.stopPropagation()} // Prevent bubbling!
                   >
