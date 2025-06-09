@@ -1,5 +1,5 @@
 // components/NavigationButtons.tsx
-import React from 'react';
+import React from "react";
 
 interface NavigationButtonsProps {
   activeStep: number;
@@ -7,8 +7,12 @@ interface NavigationButtonsProps {
   onBack: () => void;
 }
 
-const NavigationButtons: React.FC<NavigationButtonsProps> = ({ activeStep, stepsLength, onBack }) => (
-  <div className="flex justify-between justify-self-end">
+const NavigationButtons: React.FC<NavigationButtonsProps> = ({
+  activeStep,
+  stepsLength,
+  onBack,
+}) => (
+  <div className="flex justify-between absolute bottom-4 left-4 right-4 lg:static ">
     {activeStep > 0 && activeStep < stepsLength + 1 && (
       <button
         type="button"

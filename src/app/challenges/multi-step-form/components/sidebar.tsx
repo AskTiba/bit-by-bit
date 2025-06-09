@@ -43,7 +43,7 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[1fr_auto] max-h-screen w-full bg-gray-100">
+    <section className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[1fr_auto] max-h-screen w-full">
       {/* Sidebar Image */}
       <div className="relative w-full">
         <Image
@@ -67,7 +67,7 @@ const Sidebar: React.FC = () => {
       {/* Step Content and Navigation */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="col-span-2 grid grid-rows-[1fr_auto] gap-6 bg-green-200 rounded-xl shadow-md"
+        className="col-span-2 grid grid-rows-[1fr_auto] absolute z-20 top-24 lg:static mx-3 lg:bg-green-500 bg-white rounded-xl lg:mx-0"
       >
         <StepContent
           activeStep={activeStep}
@@ -76,13 +76,21 @@ const Sidebar: React.FC = () => {
           register={register}
           errors={errors}
         />
-
+        <div className="hidden">
+          <NavigationButtons
+            activeStep={activeStep}
+            stepsLength={steps.length}
+            onBack={handleBack}
+          />
+        </div>
+      </form>
+      <div className="lg:hidden">
         <NavigationButtons
           activeStep={activeStep}
           stepsLength={steps.length}
           onBack={handleBack}
         />
-      </form>
+      </div>
     </section>
   );
 };
