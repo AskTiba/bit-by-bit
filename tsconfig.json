@@ -19,7 +19,12 @@
       }
     ],
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "~/ecommerce-product-page/*": [
+        "./src/app/challenges/ecommerce-product-page/*"
+      ],
+      "~/expense-tracker/*": ["./src/app/challenges/expense-tracker/*"],
+      "~/multi-step-form/*": ["./src/app/challenges/multi-step-form/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
