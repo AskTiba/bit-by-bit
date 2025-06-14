@@ -6,12 +6,14 @@ interface StepIndicatorProps {
   steps: number[];
   activeStep: number;
   onStepClick: (index: number) => void;
+  visitedSteps: boolean[];
 }
 
 const StepIndicator: React.FC<StepIndicatorProps> = ({
   steps,
   activeStep,
   onStepClick,
+  visitedSteps,
 }) => (
   <div className="absolute inset-0 z-10 mt-8 lg:flex-col lg:gap-10 flex gap-6 justify-center lg-justify-start">
     {steps.map((step, index) => (

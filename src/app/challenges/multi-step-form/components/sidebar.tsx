@@ -16,6 +16,7 @@ const steps = [1, 2, 3, 4]; // 4 steps
 
 const Sidebar: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [isYearly, setIsYearly] = useState(false);
   const [visitedSteps, setVisitedSteps] = useState<boolean[]>(
     Array(steps.length).fill(false)
   );
@@ -95,6 +96,8 @@ const Sidebar: React.FC = () => {
       >
         <StepContent
           activeStep={activeStep}
+          isYearly={isYearly}
+          setIsYearly={setIsYearly}
           register={register}
           errors={errors}
         />
