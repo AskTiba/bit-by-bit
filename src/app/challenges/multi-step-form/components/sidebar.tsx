@@ -1,7 +1,7 @@
-// components/Sidebar.tsx
+// Sidebar.tsx
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import sidebar from "../assets/images/bg-sidebar-mobile.svg";
 import desktop_sidebar from "../assets/images/bg-sidebar-desktop.svg";
@@ -12,85 +12,99 @@ import StepContent from "./StepContent";
 import NavigationButtons from "./NavigationButtons";
 import { FormData } from "../lib/types/formData";
 
-const steps = [1, 2, 3, 4];
+const steps = [1, 2, 3, 4]; // 4 steps
 
 const Sidebar: React.FC = () => {
-  const [activeStep, setActiveStep] = useState<number>(0); // Tracks current step
-  const [isYearly, setIsYearly] = useState<boolean>(false); // Toggles plan type
+  const [activeStep, setActiveStep] = useState(0);
+  const [visitedSteps, setVisitedSteps] = useState<boolean[]>(
+    Array(steps.length).fill(false)
+  );
 
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    if (activeStep < steps.length) {
-      setActiveStep((prev) => prev + 1);
-    } else {
-      console.log("🎉 Form submitted:", data);
-    }
+  // Mark step visited when activeStep changes
+  useEffect(() => {
+    setVisitedSteps((prev) => {
+      const clone = [...prev];
+      clone[activeStep] = true;
+      return clone;
+    });
+  }, [activeStep]);
+
+  // Move forward with validation
+  const onNext = async () => {
+    const valid = await trigger(); // validate current step
+    if (!valid) return;
+    setActiveStep((prev) => Math.min(prev + 1, steps.length));
   };
 
-  const handleStepClick = (index: number) => {
-    if (index <= activeStep) {
-      setActiveStep(index);
-    }
-  };
-
-  const handleBack = () => {
+  // Move backward
+  const onBack = () => {
     setActiveStep((prev) => Math.max(prev - 1, 0));
+  };
+
+  // Click a step indicator: allow if visited
+  const handleStepClick = async (index: number) => {
+    if (visitedSteps[index]) {
+      setActiveStep(index);
+    } else if (index === activeStep + 1) {
+      // If next step isn’t visited yet, gate it behind validation
+      const valid = await trigger();
+      if (valid) setActiveStep(index);
+    }
+  };
+
+  // Final submission
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log("🎉 Form completed:", data);
+    setActiveStep(steps.length); // go to Appreciation screen
   };
 
   return (
     <section className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[1fr_auto] max-h-screen w-full">
-      {/* Sidebar Image */}
+      {/* Sidebar image & step indicators */}
       <div className="relative w-full">
         <Image
           src={desktop_sidebar}
-          alt="Sidebar background"
+          alt="Desktop sidebar"
           className="hidden lg:flex rounded-xl"
         />
         <Image
           src={sidebar}
-          alt="Sidebar background mobile"
+          alt="Mobile sidebar"
           className="block lg:hidden w-full"
         />
-        {/* Step indicators */}
+
         <StepIndicator
           steps={steps}
           activeStep={activeStep}
+          visitedSteps={visitedSteps}
           onStepClick={handleStepClick}
         />
       </div>
 
-      {/* Step Content and Navigation */}
+      {/* Wizard form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="col-span-2 grid grid-rows-[1fr_auto] absolute z-20 top-24 lg:static mx-3 lg:bg-green-500 bg-white rounded-xl lg:mx-0"
+        className="col-span-2 grid grid-rows-[1fr_auto] absolute z-20 top-24 lg:static mx-3 bg-white rounded-xl lg:mx-0"
       >
         <StepContent
           activeStep={activeStep}
-          isYearly={isYearly}
-          setIsYearly={setIsYearly}
           register={register}
           errors={errors}
         />
-        <div className="hidden">
-          <NavigationButtons
-            activeStep={activeStep}
-            stepsLength={steps.length}
-            onBack={handleBack}
-          />
-        </div>
-      </form>
-      <div className="lg:hidden">
         <NavigationButtons
           activeStep={activeStep}
           stepsLength={steps.length}
-          onBack={handleBack}
+          onNext={onNext}
+          onBack={onBack}
         />
-      </div>
+      </form>
     </section>
   );
 };

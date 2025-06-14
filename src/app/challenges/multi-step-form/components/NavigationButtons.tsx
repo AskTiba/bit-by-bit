@@ -5,47 +5,43 @@ interface NavigationButtonsProps {
   activeStep: number;
   stepsLength: number;
   onBack: () => void;
+  onNext: () => void;
 }
 
 const NavigationButtons: React.FC<NavigationButtonsProps> = ({
   activeStep,
   stepsLength,
   onBack,
-}) => (
-  <div className="flex justify-between absolute bottom-4 left-4 right-4 lg:static ">
-    {activeStep > 0 && activeStep < stepsLength + 1 && (
-      <button
-        type="button"
-        onClick={onBack}
-        className="px-4 py-2 bg-transparent text-purple-500 cursor-pointer rounded-md hover:bg-gray-700 transition"
-      >
-        Go Back
-      </button>
-    )}
-    <div className="ml-auto">
-      {activeStep < stepsLength - 1 && (
+  onNext,
+}) => {
+  if (activeStep >= stepsLength) return null; // Hide on final appreciation step
+
+  return (
+    <div className="flex justify-between items-center p-4">
+      {activeStep > 0 && (
         <button
-          type="submit"
-          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium cursor-pointer rounded-md transition duration-300"
+          type="button"
+          onClick={onBack}
+          className="px-4 py-2 bg-transparent text-purple-500 cursor-pointer rounded-md hover:bg-gray-700 transition"
         >
-          Next Step
+          Go Back
         </button>
       )}
-      {activeStep === stepsLength - 1 && (
+      <div className="ml-auto">
         <button
-          type="submit"
-          className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-md transition duration-300"
+          type="button"
+          onClick={onNext}
+          className={`px-6 py-2 ${
+            activeStep === stepsLength - 1
+              ? "bg-green-600 hover:bg-green-700"
+              : "bg-blue-600 hover:bg-blue-700"
+          } text-white font-medium cursor-pointer rounded-md transition duration-300`}
         >
-          Confirm
+          {activeStep === stepsLength - 1 ? "Confirm" : "Next Step"}
         </button>
-      )}
-      {activeStep === stepsLength && (
-        <div className="text-sm text-gray-400 italic">
-          <p>🎉 Thank you! You are all set.</p>
-        </div>
-      )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default NavigationButtons;
