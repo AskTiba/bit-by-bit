@@ -84,7 +84,6 @@ const Sidebar: React.FC = () => {
         <StepIndicator
           steps={steps}
           activeStep={activeStep}
-          visitedSteps={visitedSteps}
           onStepClick={handleStepClick}
         />
       </div>
