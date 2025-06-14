@@ -1,12 +1,14 @@
 import React from "react";
-import ReactHooks from "~/app/challenges/testing/components/reactHooks";
+// import ReactHooks from "~/app/challenges/testing/components/reactHooks";
 import RefHook from "~/app/challenges/testing/components/rehHook";
+import LearnZustand from "./components/LearnZustand";
 
 const Testing = () => {
   return (
     <div>
-      <ReactHooks />
+      {/* <ReactHooks /> */}
       <RefHook />
+      <LearnZustand />
     </div>
   );
 };
