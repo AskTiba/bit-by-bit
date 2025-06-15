@@ -2,9 +2,17 @@
 
 A **Next.js** monorepo for tracking and deploying all my Frontend Mentor challenges — bit by bit, one deployment at a time.
 
-![Vercel](https://img.shields.io/badge/deployed-on-vercel-000?style=flat&logo=vercel)
-![Last commit](https://img.shields.io/github/last-commit/yourname/bit-by-bit)
-![License: MIT](https://img.shields.io/github/license/yourname/bit-by-bit)
+<p align="center">
+  
+  <img src="https://img.shields.io/badge/next.js-000?style=flat&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/tailwindCSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/typescript-3178C6?style=flat&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/zustand-000?style=flat&logo=zotero&logoColor=white" alt="Zustand" />
+  <img src="https://img.shields.io/badge/shadcn--ui-000?style=flat&logo=react&logoColor=white" alt="ShadCN UI" />
+  <img src="https://img.shields.io/badge/open%20to-contributions-brightgreen?style=flat&logo=github" alt="Open to Contributions" />
+  <img src="https://img.shields.io/github/last-commit/AskTiba/bit-by-bit" alt="Last Commit" />
+  <img src="https://img.shields.io/github/license/AskTiba/bit-by-bit" alt="License" />
+</p>
 
 ---
 
@@ -12,7 +20,7 @@ A **Next.js** monorepo for tracking and deploying all my Frontend Mentor challen
 
 _Add a screenshot or GIF of your homepage showing challenge buttons._
 
-[Live Preview](https://bit-by-bit.vercel.app)
+[Live Preview](https://bit-by-bit-sigma.vercel.app/)
 
 ---
 
