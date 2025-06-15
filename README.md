@@ -1,39 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# bit-by-bit ⚡
 
-## Getting Started
+A **Next.js** monorepo for tracking and deploying all my Frontend Mentor challenges — bit by bit, one deployment at a time.
 
-First, run the development server:
+![Vercel](https://img.shields.io/badge/deployed-on-vercel-000?style=flat&logo=vercel)
+![Last commit](https://img.shields.io/github/last-commit/yourname/bit-by-bit)
+![License: MIT](https://img.shields.io/github/license/yourname/bit-by-bit)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 📸 Demo
+
+_Add a screenshot or GIF of your homepage showing challenge buttons._
+
+[Live Preview](https://bit-by-bit.vercel.app)
+
+---
+
+## 📚 Table of Contents
+
+- [Overview](#overview)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Installation & Local Dev](#installation--local-dev)
+- [Usage](#usage)
+- [Workspace](#workspace)
+- [Live Deployment](#live-deployment)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+
+---
+
+## 🔍 Overview
+
+This repo houses **all my Frontend Mentor challenges** in a single Next.js project inside the `challenges/` folder. A dynamic homepage lets me navigate each challenge without juggling repos. Everything's deployed via Vercel, so I can share a direct link like `/challenges/interactive-card`.
+
+The `testing/` directory is used for experimenting with components, UI layouts, Zustand state management, shadcn/ui elements, and general concepts I want to test.
+
+---
+
+## 🧰 Tech Stack
+
+- Next.js (App Router)
+- React + TypeScript
+- Tailwind CSS
+- Zustand
+- shadcn/ui
+- Git for version control
+- Vercel for continuous deployment
+
+---
+
+## 🗂️ Project Structure
+
+```
+/
+├─ challenges/
+│   ├─ challenge-one/
+│   ├─ challenge-two/
+│   └─ ...
+├─ workspace/
+│   ├─ component-tests/
+│   └─ feature-sandbox/
+├─ public/
+├─ pages/
+├─ styles/
+├─ tsconfig.json
+└─ next.config.js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Installation & Local Dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Clone the repository
+git clone https://github.com/AskTiba/bit-by-bit.git
+cd bit-by-bit
 
-## Learn More
+# Install dependencies
+npm install   # or yarn
 
-To learn more about Next.js, take a look at the following resources:
+# Run the development server
+npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Visit http://localhost:3000
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 👉 Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- On the homepage, you'll find buttons that route to individual challenges.
+- Each challenge is located at: `/challenges/challenge-name`
+- The `testing/` is for personal testing and component experimentation.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
 
+## 🧪 Testing / Experiments
 
-Bit-by-bit --> Small challenge-based learning
+The `Testing/` folder is used for:
+
+- Testing React component composition
+- Zustand store usage and patterns
+- shadcn/ui integration and customization
+- Responsive layout experiments
+- Animation, interactivity, and performance tweaks
+
+---
+
+## 🚀 Live Deployment
+
+Deployed via [Vercel](https://vercel.com):
+
+**[bit-by-bit.vercel.app](https://bit-by-bit-sigma.vercel.app/)**
+
+All challenges are publicly viewable through routed links — perfect for demoing.
+
+---
+
+## 🤝 Contributing
+
+I welcome contributions for:
+
+- Improving layout, responsiveness, and performance
+- Refactoring or cleaning up UI components
+- Fixing bugs or proposing better state/logic patterns
+
+### How to contribute
+
+1. Fork the repo
+2. Create a branch: `git checkout -b fix/challenge-layout`
+3. Commit changes and push: `git push origin fix/challenge-layout`
+4. Open a Pull Request and describe your fix or enhancement
+
+---
+
+## 📝 License
+
+Licensed under the [MIT License](./LICENSE).
+
+---
+
+## 🙏 Acknowledgements
+
+- [Frontend Mentor](https://frontendmentor.io) – for providing free, well-designed UI challenges
+- [Tailwind CSS](https://tailwindcss.com)
+- [shadcn/ui](https://ui.shadcn.com)
+- [Vercel](https://vercel.com) – for free, developer-first deployments
+
+---
+
+> Built with 💻, bugs, and breakthroughs — learning bit by bit.
