@@ -62,19 +62,34 @@ The `testing/` directory is used for experimenting with components, UI layouts, 
 ## 🗂️ Project Structure
 
 ```
-/
-├─ challenges/
-│   ├─ challenge-one/
-│   ├─ challenge-two/
-│   └─ ...
-├─ workspace/
-│   ├─ component-tests/
-│   └─ feature-sandbox/
-├─ public/
-├─ pages/
-├─ styles/
-├─ tsconfig.json
-└─ next.config.js
+├──   |app
+├──   |  |challenges
+├──   |  |  |tic-tac-toe
+├──   |  |  |  |components
+├──   |  |  |testing
+├──   |  |  |  |components
+├──   |  |  |expense-tracker
+├──   |  |  |multi-step-form
+├──   |  |  |  |lib
+├──   |  |  |  |  |types
+├──   |  |  |  |  |hooks
+├──   |  |  |  |components
+├──   |  |  |  |assets
+├──   |  |  |  |  |images
+├──   |  |  |  |  |design
+├──   |  |  |  |  |fonts
+├──   |  |  |  |docs
+├──   |  |  |ecommerce-product-page
+├──   |  |  |  |components
+├──   |  |  |  |assets
+├──   |  |  |  |  |images
+├──   |  |  |  |  |design
+├──   |  |  |  |docs
+├── .git
+├── .next
+├── node_modules
+├── scripts
+
 ```
 
 ---
