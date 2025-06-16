@@ -62,7 +62,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <main className="bg-blue-100 min-h-screen lg:flex items-center justify-center">
-      <section className="grid grid-cols-1 lg:grid-cols-3 max-w-4xl w-full h-full bg-white rounded-xl shadow-lg overflow-hidden">
+      <section className="grid grid-cols-1 lg:grid-cols-3 max-w-4xl w-full h-full bg-white lg:rounded-xl shadow-lg overflow-hidden">
         {/* Sidebar image & step indicators */}
         <div className="relative w-full h-48 lg:h-auto">
           {/* Desktop image */}
@@ -89,7 +89,7 @@ const Sidebar: React.FC = () => {
         {/* Wizard form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="col-span-2 flex flex-col justify-between  h-full overflow-y-auto"
+          className="col-span-2 flex flex-col justify-between lg:mx-20  h-full overflow-y-auto"
         >
           <div className="flex-1 ">
             <StepContent
