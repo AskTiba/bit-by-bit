@@ -4,7 +4,7 @@ import Sidebar from "./components/sidebar";
 const Home = () => {
   return (
     <>
-      <div className="">
+      <div className="bg-blue-100 h-screen">
         <Sidebar />
       </div>
     </>

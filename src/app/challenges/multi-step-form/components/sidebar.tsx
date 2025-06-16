@@ -91,7 +91,7 @@ const Sidebar: React.FC = () => {
       {/* Wizard form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="col-span-2 grid grid-rows-[1fr_auto] absolute z-20 top-24 lg:static mx-3 bg-white rounded-xl lg:mx-0"
+        className="col-span-2 grid grid-rows-[1fr_auto] bg-white absolute z-20 top-24 lg:static mx-3 rounded-xl lg:mx-0"
       >
         <StepContent
           activeStep={activeStep}
@@ -100,13 +100,23 @@ const Sidebar: React.FC = () => {
           register={register}
           errors={errors}
         />
+        <div className="hidden lg:block">
+          <NavigationButtons
+            activeStep={activeStep}
+            stepsLength={steps.length}
+            onNext={onNext}
+            onBack={onBack}
+          />
+        </div>
+      </form>
+      <div className="lg:hidden absolute bottom-0 w-full">
         <NavigationButtons
           activeStep={activeStep}
           stepsLength={steps.length}
           onNext={onNext}
           onBack={onBack}
         />
-      </form>
+      </div>
     </section>
   );
 };
