@@ -1,4 +1,3 @@
-// Sidebar.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -37,70 +36,84 @@ const Sidebar: React.FC = () => {
     });
   }, [activeStep]);
 
-  // Move forward with validation
   const onNext = async () => {
     const valid = await trigger(); // validate current step
     if (!valid) return;
     setActiveStep((prev) => Math.min(prev + 1, steps.length));
   };
 
-  // Move backward
   const onBack = () => {
     setActiveStep((prev) => Math.max(prev - 1, 0));
   };
 
-  // Click a step indicator: allow if visited
   const handleStepClick = async (index: number) => {
     if (visitedSteps[index]) {
       setActiveStep(index);
     } else if (index === activeStep + 1) {
-      // If next step isn’t visited yet, gate it behind validation
       const valid = await trigger();
       if (valid) setActiveStep(index);
     }
   };
 
-  // Final submission
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log("🎉 Form completed:", data);
-    setActiveStep(steps.length); // go to Appreciation screen
+    setActiveStep(steps.length);
   };
 
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-[1fr_auto] max-h-screen w-full">
-      {/* Sidebar image & step indicators */}
-      <div className="relative w-full">
-        <Image
-          src={desktop_sidebar}
-          alt="Desktop sidebar"
-          className="hidden lg:flex rounded-xl"
-        />
-        <Image
-          src={sidebar}
-          alt="Mobile sidebar"
-          className="block lg:hidden w-full"
-        />
+    <main className="bg-blue-100 min-h-screen lg:flex items-center justify-center">
+      <section className="grid grid-cols-1 lg:grid-cols-3 max-w-4xl w-full h-full bg-white rounded-xl shadow-lg overflow-hidden">
+        {/* Sidebar image & step indicators */}
+        <div className="relative w-full h-48 lg:h-auto">
+          {/* Desktop image */}
+          <Image
+            src={desktop_sidebar}
+            alt="Desktop sidebar"
+            className="hidden lg:block h-full w-full object-cover"
+          />
+          {/* Mobile image */}
+          <Image
+            src={sidebar}
+            alt="Mobile sidebar"
+            className="block lg:hidden h-full w-full object-cover"
+          />
+          <div className="absolute top-0 left-0 w-full h-full">
+            <StepIndicator
+              steps={steps}
+              activeStep={activeStep}
+              onStepClick={handleStepClick}
+            />
+          </div>
+        </div>
 
-        <StepIndicator
-          steps={steps}
-          activeStep={activeStep}
-          onStepClick={handleStepClick}
-        />
-      </div>
+        {/* Wizard form */}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="col-span-2 flex flex-col justify-between  h-full overflow-y-auto"
+        >
+          <div className="flex-1 ">
+            <StepContent
+              activeStep={activeStep}
+              isYearly={isYearly}
+              setIsYearly={setIsYearly}
+              register={register}
+              errors={errors}
+            />
+          </div>
 
-      {/* Wizard form */}
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="col-span-2 grid grid-rows-[1fr_auto] bg-white absolute z-20 top-24 lg:static mx-3 rounded-xl lg:mx-0"
-      >
-        <StepContent
-          activeStep={activeStep}
-          isYearly={isYearly}
-          setIsYearly={setIsYearly}
-          register={register}
-          errors={errors}
-        />
-        <div className="hidden lg:block">
+          {/* Desktop navigation */}
+          <div className="hidden lg:block pt-4">
+            <NavigationButtons
+              activeStep={activeStep}
+              stepsLength={steps.length}
+              onNext={onNext}
+              onBack={onBack}
+            />
+          </div>
+        </form>
+
+        {/* Mobile navigation */}
+        <div className="lg:hidden sticky bottom-0 w-full bg-white py-3 shadow-inner z-10">
           <NavigationButtons
             activeStep={activeStep}
             stepsLength={steps.length}
@@ -108,16 +121,8 @@ const Sidebar: React.FC = () => {
             onBack={onBack}
           />
         </div>
-      </form>
-      <div className="lg:hidden absolute bottom-0 w-full">
-        <NavigationButtons
-          activeStep={activeStep}
-          stepsLength={steps.length}
-          onNext={onNext}
-          onBack={onBack}
-        />
-      </div>
-    </section>
+      </section>
+    </main>
   );
 };
 

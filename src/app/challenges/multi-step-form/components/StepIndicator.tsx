@@ -13,7 +13,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({
   activeStep,
   onStepClick,
 }) => (
-  <div className="absolute inset-0 z-10 mt-8 lg:flex-col lg:gap-10 flex gap-6 justify-center lg-justify-start">
+  <div className="absolute inset-0 z-10 mt-8 lg:left-6 lg:flex-col lg:gap-10 flex gap-6 justify-center lg:justify-start">
     {steps.map((step, index) => (
       <button
         key={index}
