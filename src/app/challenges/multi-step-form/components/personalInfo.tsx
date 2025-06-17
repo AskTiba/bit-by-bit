@@ -10,10 +10,10 @@ interface PersonalInfoProps {
 const PersonalInfo = ({ register, errors }: PersonalInfoProps) => {
   return (
     <section className="">
-      <div className="my-7 mx-4 flex flex-col">
+      <div className="my-7 px-6 flex flex-col">
         <h2 className="font-semibold text-xl">Personal Info</h2>
         <p className="text-gray-500 text-sm mb-4">
-          Please provide your name, email address, and phone number dffdfdfdfdf.
+          Please provide your name, email address, and phone number.
         </p>
 
         <div className="flex flex-col gap-4">

@@ -1,12 +1,12 @@
 import React from "react";
-import Sidebar from "./components/sidebar";
+import FormPage from "./components/FormPage";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
-      <Sidebar />
+      <FormPage />
     </>
   );
 };
 
-export default Home;
+export default HomePage;

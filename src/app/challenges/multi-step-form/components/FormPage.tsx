@@ -13,7 +13,7 @@ import { FormData } from "../lib/types/formData";
 
 const steps = [1, 2, 3, 4]; // 4 steps
 
-const Sidebar: React.FC = () => {
+const FormPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isYearly, setIsYearly] = useState(false);
   const [visitedSteps, setVisitedSteps] = useState<boolean[]>(
@@ -62,7 +62,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <main className="bg-blue-100 min-h-screen lg:flex items-center justify-center lg:py-16">
-      <section className="grid grid-cols-1 lg:grid-cols-3 max-w-4xl w-full h-full bg-white lg:rounded-xl overflow-hidden">
+      <section className="grid grid-cols-1 lg:grid-cols-3 max-w-4xl w-full h-full bg-blue-100 lg:bg-white lg:rounded-xl overflow-hidden">
         {/* Sidebar image & step indicators */}
         <div className="relative h-48 lg:h-auto lg:min-h-full w-full">
           {/* Desktop image */}
@@ -89,9 +89,9 @@ const Sidebar: React.FC = () => {
         {/* Wizard form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="col-span-2 lg:relative flex flex-col justify-between lg:mt-4 lg:mx-12 h-full"
+          className="col-span-2 relative lg:static flex flex-col bg-white rounded-xl -top-20 z-60 justify-between mx-3 h-full"
         >
-          <div className="flex-1 ">
+          <div className="">
             <StepContent
               activeStep={activeStep}
               isYearly={isYearly}
@@ -100,9 +100,7 @@ const Sidebar: React.FC = () => {
               errors={errors}
             />
           </div>
-
-          {/* Desktop navigation */}
-          <div className="hidden lg:block sticky bottom-0 w-full bg-white py-3 z-10">
+          <div className="hidden lg:block sticky bottom-0 w-full py-3 z-10">
             <NavigationButtons
               activeStep={activeStep}
               stepsLength={steps.length}
@@ -111,19 +109,18 @@ const Sidebar: React.FC = () => {
             />
           </div>
         </form>
-
-        {/* Mobile navigation */}
-        <div className="lg:hidden sticky bottom-0 w-full bg-white py-3 z-10">
-          <NavigationButtons
-            activeStep={activeStep}
-            stepsLength={steps.length}
-            onNext={onNext}
-            onBack={onBack}
-          />
-        </div>
       </section>
+      {/* Mobile navigation */}
+      <div className="lg:hidden absolute   bottom-0 w-full bg- py-3 z-10">
+        <NavigationButtons
+          activeStep={activeStep}
+          stepsLength={steps.length}
+          onNext={onNext}
+          onBack={onBack}
+        />
+      </div>
     </main>
   );
 };
 
-export default Sidebar;
+export default FormPage;
