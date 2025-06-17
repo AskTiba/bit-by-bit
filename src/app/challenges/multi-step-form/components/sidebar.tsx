@@ -61,15 +61,15 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <main className="bg-blue-100 min-h-screen lg:flex items-center justify-center">
-      <section className="grid grid-cols-1 lg:grid-cols-3 max-w-4xl w-full h-full bg-white lg:rounded-xl shadow-lg overflow-hidden">
+    <main className="bg-blue-100 min-h-screen lg:flex items-center justify-center lg:py-16">
+      <section className="grid grid-cols-1 lg:grid-cols-3 max-w-4xl w-full h-full bg-white lg:rounded-xl overflow-hidden">
         {/* Sidebar image & step indicators */}
-        <div className="relative w-full h-48 lg:h-auto">
+        <div className="relative h-48 lg:h-auto lg:min-h-full w-full">
           {/* Desktop image */}
           <Image
             src={desktop_sidebar}
             alt="Desktop sidebar"
-            className="hidden lg:block h-full w-full object-cover"
+            className="hidden lg:flex w-full h-full object-contain p-3 rounded-xl"
           />
           {/* Mobile image */}
           <Image
@@ -89,7 +89,7 @@ const Sidebar: React.FC = () => {
         {/* Wizard form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="col-span-2 flex flex-col justify-between lg:mx-20  h-full overflow-y-auto"
+          className="col-span-2 lg:relative flex flex-col justify-between lg:mt-4 lg:mx-12 h-full"
         >
           <div className="flex-1 ">
             <StepContent
@@ -102,7 +102,7 @@ const Sidebar: React.FC = () => {
           </div>
 
           {/* Desktop navigation */}
-          <div className="hidden lg:block pt-4">
+          <div className="hidden lg:block sticky bottom-0 w-full bg-white py-3 z-10">
             <NavigationButtons
               activeStep={activeStep}
               stepsLength={steps.length}
@@ -113,7 +113,7 @@ const Sidebar: React.FC = () => {
         </form>
 
         {/* Mobile navigation */}
-        <div className="lg:hidden sticky bottom-0 w-full bg-white py-3 shadow-inner z-10">
+        <div className="lg:hidden sticky bottom-0 w-full bg-white py-3 z-10">
           <NavigationButtons
             activeStep={activeStep}
             stepsLength={steps.length}

@@ -20,23 +20,25 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({
   activeStep,
   onStepClick,
 }) => (
-  <div className="absolute inset-0 z-10 lg:top-10 -top-20 lg:left-6 lg:flex-col lg:gap-10 flex gap-6 justify-center lg:justify-start">
+  <div className="absolute inset-0 z-10 lg:top-10 -top-20 lg:left-10 lg:flex-col lg:gap-8 flex gap-6 justify-center lg:justify-start">
     {steps.map((step, index) => (
       <div key={index} className="flex items-center lg:items-center lg:gap-3">
-        <button
-          onClick={() => onStepClick(index)}
-          aria-pressed={index === activeStep}
-          className={clsx(
-            "size-7 rounded-full border-2 flex items-center justify-center font-medium transition-colors duration-300",
-            {
-              "bg-white text-black border-blue-600": index === activeStep,
-              "bg-transparent text-white border-gray-300 hover:bg-white hover:text-black":
-                index !== activeStep,
-            }
-          )}
-        >
-          {step}
-        </button>
+        <div className="">
+          <button
+            onClick={() => onStepClick(index)}
+            aria-pressed={index === activeStep}
+            className={clsx(
+              "size-7 rounded-full border-2 flex items-center justify-center font-medium transition-colors duration-300",
+              {
+                "bg-white text-black border-blue-600": index === activeStep,
+                "bg-transparent text-white border-gray-300 hover:bg-white hover:text-black":
+                  index !== activeStep,
+              }
+            )}
+          >
+            {step}
+          </button>
+        </div>
 
         {/* Only show text on large screens */}
         <div className="hidden lg:flex flex-col text-white">
