@@ -22,7 +22,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
         <button
           type="button"
           onClick={onBack}
-          className="px-4 py-2 bg-transparent text-purple-500 cursor-pointer rounded-md hover:bg-gray-700 transition"
+          className="px-4 py-2 bg-transparent text-purple-500 cursor-pointer rounded-md hover:text-purple-900 transition"
         >
           Go Back
         </button>

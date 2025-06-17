@@ -32,16 +32,19 @@ export const yearlyPlans: PlanData[] = [
   {
     name: "Arcade",
     price: "$90/yr",
+    promoText: "2 months free",
     icon: arcadeIcon,
   },
   {
     name: "Advanced",
     price: "$120/yr",
+    promoText: "2 months free",
     icon: advancedIcon,
   },
   {
     name: "Pro",
     price: "$150/yr",
+    promoText: "2 months free",
     icon: proIcon,
   },
 ];

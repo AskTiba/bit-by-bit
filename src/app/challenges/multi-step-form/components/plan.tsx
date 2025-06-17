@@ -33,6 +33,7 @@ const Plan = ({ isYearly, setIsYearly }: PlanProps) => {
                 key={plan.name}
                 name={plan.name}
                 price={plan.price}
+                promoText={plan.promoText}
                 icon={plan.icon}
                 isActive={selectedPlan === plan.name}
                 onClick={() => setSelectedPlan(plan.name)}
