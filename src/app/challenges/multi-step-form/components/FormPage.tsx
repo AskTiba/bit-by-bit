@@ -9,13 +9,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import StepIndicator from "./StepIndicator";
 import StepContent from "./StepContent";
 import NavigationButtons from "./NavigationButtons";
-import { FormData } from "../lib/types/formData";
+import { MyFormData } from "~/lib/types/formData";
 
 const steps = [1, 2, 3, 4]; // 4 steps
 
 const FormPage = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [isYearly, setIsYearly] = useState(false);
   const [visitedSteps, setVisitedSteps] = useState<boolean[]>(
     Array(steps.length).fill(false)
   );
@@ -25,7 +24,8 @@ const FormPage = () => {
     handleSubmit,
     trigger,
     formState: { errors },
-  } = useForm<FormData>();
+    setValue, // 👈 Add this
+  } = useForm<MyFormData>();
 
   // Mark step visited when activeStep changes
   useEffect(() => {
@@ -55,7 +55,7 @@ const FormPage = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<MyFormData> = (data) => {
     console.log("🎉 Form completed:", data);
     setActiveStep(steps.length);
   };
@@ -94,10 +94,9 @@ const FormPage = () => {
           <div className="">
             <StepContent
               activeStep={activeStep}
-              isYearly={isYearly}
-              setIsYearly={setIsYearly}
               register={register}
               errors={errors}
+              setValue={setValue} // 👈 Add this too
             />
           </div>
           <div className="hidden lg:block sticky bottom-0 w-full py-3 z-10">

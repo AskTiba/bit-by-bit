@@ -1,90 +1,69 @@
-import React from "react";
-import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { FormData } from "../lib/types/formData";
+"use client";
 
-interface PersonalInfoProps {
-  register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
+import React, { useEffect } from "react";
+import {
+  UseFormRegister,
+  FieldErrors,
+  UseFormSetValue,
+} from "react-hook-form";
+import { useFormStore } from "~/lib/store/formDataStore";
+import { MyFormData } from "~/lib/types/formData";
+
+interface Props {
+  register: UseFormRegister<MyFormData>;
+  errors: FieldErrors<MyFormData>;
+  setValue: UseFormSetValue<MyFormData>; // ✅ Correct type
 }
 
-const PersonalInfo = ({ register, errors }: PersonalInfoProps) => {
+const PersonalInfo: React.FC<Props> = ({ register, errors, setValue }) => {
+  const { formData, updateFormData } = useFormStore();
+
+  // ✅ On mount: seed values from store into RHF
+  useEffect(() => {
+    if (!setValue) return;
+
+    setValue("name", formData.name);
+    setValue("email", formData.email);
+    setValue("phone", formData.phone.toString());
+  }, [formData, setValue]);
+
+  // ✅ On change: sync RHF state to global store
+  const sync =
+    (field: keyof MyFormData) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      updateFormData({ [field]: e.target.value });
+    };
+
   return (
-    <section className="">
-      <div className="my-7 px-6 flex flex-col">
-        <h2 className="font-semibold text-xl">Personal Info</h2>
-        <p className="text-gray-500 text-sm mb-4">
-          Please provide your name, email address, and phone number.
-        </p>
+    <div className="p-6 flex flex-col gap-4">
+      <h2 className="text-xl font-semibold">Personal Info</h2>
 
-        <div className="flex flex-col gap-4">
-          <div>
-            <label htmlFor="name" className="text-sm font-medium">
-              Full Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              placeholder="e.g. Stephen King"
-              {...register("name", { required: "Name is required" })}
-              className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            {errors.name && (
-              <span className="text-red-500 text-xs">
-                {errors.name.message}
-              </span>
-            )}
-          </div>
+      <label>Name</label>
+      <input
+        {...register("name", { required: true })}
+        onChange={sync("name")}
+        className="w-full border p-2 rounded"
+      />
+      {errors.name && <p className="text-red-500">Required</p>}
 
-          <div>
-            <label htmlFor="email" className="text-sm font-medium">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="e.g. stephenking@lorem.com"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^\S+@\S+$/i,
-                  message: "Invalid email address",
-                },
-              })}
-              className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            {errors.email && (
-              <span className="text-red-500 text-xs">
-                {errors.email.message}
-              </span>
-            )}
-          </div>
+      <label>Email</label>
+      <input
+        {...register("email", {
+          required: true,
+          pattern: /^[^@ ]+@[^@ ]+\.[^@ ]+$/,
+        })}
+        onChange={sync("email")}
+        className="w-full border p-2 rounded"
+      />
+      {errors.email && <p className="text-red-500">Invalid email</p>}
 
-          <div>
-            <label htmlFor="number" className="text-sm font-medium">
-              Phone Number
-            </label>
-            <input
-              id="number"
-              type="tel"
-              placeholder=" e.g. +1 234 567 890"
-              {...register("number", {
-                required: "Phone number is required",
-                pattern: {
-                  value: /^[0-9]{7,14}$/,
-                  message: "Enter a valid phone number",
-                },
-              })}
-              className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            {errors.number && (
-              <span className="text-red-500 text-xs">
-                {errors.number.message}
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
+      <label>Phone</label>
+      <input
+        {...register("phone", { required: true })}
+        onChange={sync("phone")}
+        className="w-full border p-2 rounded"
+      />
+      {errors.phone && <p className="text-red-500">Required</p>}
+    </div>
   );
 };
 

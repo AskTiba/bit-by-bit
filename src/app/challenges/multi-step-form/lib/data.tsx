@@ -3,6 +3,7 @@ import advancedIcon from "../assets/images/icon-advanced.svg";
 import proIcon from "../assets/images/icon-pro.svg";
 import { StaticImageData } from "next/image";
 
+// 🧃 Plan Data
 type PlanData = {
   name: string;
   price: string;
@@ -49,29 +50,33 @@ export const yearlyPlans: PlanData[] = [
   },
 ];
 
-// Define the structure for each add-on
-type Addon = {
+// 🧩 Add-on Type w/ ID
+export type Addon = {
+  id: string;
   name: string;
   description: string;
   monthlyPrice: number;
   yearlyPrice: number;
 };
 
-// Array of add-ons
+// 🧠 Add-on Data (now with IDs)
 export const addons: Addon[] = [
   {
+    id: "online-service",
     name: "Online service",
     description: "Access to multiplayer games",
     monthlyPrice: 1,
     yearlyPrice: 10,
   },
   {
+    id: "larger-storage",
     name: "Larger storage",
     description: "Extra 1TB of cloud save",
     monthlyPrice: 2,
     yearlyPrice: 20,
   },
   {
+    id: "custom-profile",
     name: "Customizable Profile",
     description: "Custom theme on your profile",
     monthlyPrice: 2,

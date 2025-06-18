@@ -1,16 +1,24 @@
-// types/formData.ts
+// lib/types.ts
 
-export interface FormData {
+export type Addon = {
+  id: string; // Important: keep this as a string, not number | string
+  name: string;
+  description: string;
+  monthlyPrice: number;
+  yearlyPrice: number;
+};
+
+export type SelectedAddon = Addon & {
+  price: number; // dynamically added based on isYearly
+};
+
+export interface MyFormData {
   name: string;
   email: string;
   phone: string;
-  plan: "arcade" | "advanced" | "pro";
+  plan: string;
   isYearly: boolean;
-  addons: string[]; // or Addon[] if you're using objects
-}
-
-export interface Addon {
-  id: string;
-  name: string;
-  price: number;
+  planPrice: number;
+  addons: string[];
+  addonPrices: SelectedAddon[];
 }

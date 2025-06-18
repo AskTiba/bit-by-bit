@@ -1,6 +1,6 @@
 // components/StepContent.tsx
 import React from "react";
-import { UseFormRegister, FieldErrors } from "react-hook-form";
+import { UseFormRegister, FieldErrors, UseFormSetValue } from "react-hook-form";
 
 // Step Components
 import PersonalInfo from "./personalInfo";
@@ -8,32 +8,34 @@ import Plan from "./plan";
 import Addons from "./add-ons";
 import Finishing from "./finishing";
 import Appreciation from "./apreciation";
-
-// Import shared FormData interface
-import { FormData } from "../lib/types/formData";
+import { MyFormData } from "~/lib/types/formData";
 
 interface StepContentProps {
   activeStep: number;
-  isYearly: boolean;
-  setIsYearly: React.Dispatch<React.SetStateAction<boolean>>;
-  register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
+  setValue: UseFormSetValue<MyFormData>; // <- Add this line
+  register: UseFormRegister<MyFormData>;
+  errors: FieldErrors<MyFormData>;
 }
 
 const StepContent: React.FC<StepContentProps> = ({
   activeStep,
-  isYearly,
-  setIsYearly,
+  setValue, // <- Add this
   register,
   errors,
 }) => {
   switch (activeStep) {
     case 0:
-      return <PersonalInfo register={register} errors={errors} />;
+      return (
+        <PersonalInfo
+          register={register}
+          errors={errors}
+          setValue={setValue} // <- Pass this down
+        />
+      );
     case 1:
-      return <Plan isYearly={isYearly} setIsYearly={setIsYearly} />;
+      return <Plan />;
     case 2:
-      return <Addons isYearly={isYearly} />;
+      return <Addons />;
     case 3:
       return <Finishing />;
     case 4:
