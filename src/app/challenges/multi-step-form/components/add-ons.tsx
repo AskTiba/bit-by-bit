@@ -30,10 +30,12 @@ const AddOns: React.FC = () => {
 
   return (
     <div className="p-6 flex flex-col gap-6 w-full">
-      <h2 className="text-xl font-semibold">Pick add-ons</h2>
-      <p className="text-gray-600">
-        Add-ons help enhance your gaming experience.
-      </p>
+      <div className="">
+        <h2 className="text-3xl font-bold">Pick add-ons</h2>
+        <p className="text-gray-600">
+          Add-ons help enhance your gaming experience.
+        </p>
+      </div>
 
       <div className="flex flex-col gap-2 text-[13px]">
         {addons.map((a) => {

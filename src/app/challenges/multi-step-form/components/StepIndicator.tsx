@@ -28,7 +28,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({
             onClick={() => onStepClick(index)}
             aria-pressed={index === activeStep}
             className={clsx(
-              "size-7 rounded-full border-2 cursor-pointer flex items-center justify-center font-medium transition-colors duration-300",
+              "size-7 rounded-full border cursor-pointer flex items-center justify-center font-medium transition-colors duration-300",
               {
                 "bg-white text-black border-blue-600": index === activeStep,
                 "bg-transparent text-white border-gray-300 hover:bg-white hover:text-black":

@@ -89,9 +89,9 @@ const FormPage = () => {
         {/* Wizard form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="col-span-2 relative lg:static flex flex-col bg-white rounded-xl -top-20 z-60 justify-between mx-3 h-full"
+          className="col-span-2 relative lg:mx-12 lg:static flex flex-col bg-white rounded-xl -top-20 z-60 justify-between mx-3 h-full"
         >
-          <div className="">
+          <div className="lg:pt-5">
             <StepContent
               activeStep={activeStep}
               register={register}
@@ -99,7 +99,7 @@ const FormPage = () => {
               setValue={setValue} // 👈 Add this too
             />
           </div>
-          <div className="hidden lg:block sticky bottom-0 w-full py-3 z-10">
+          <div className="hidden lg:block  sticky bottom-0 w-full py-3 z-10">
             <NavigationButtons
               activeStep={activeStep}
               stepsLength={steps.length}

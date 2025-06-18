@@ -15,13 +15,13 @@ const Finishing = () => {
     <main className="flex-1 w-full">
       <div className="w-full p-6 flex flex-col items-center justify-center gap-6">
         <div className="w-full">
-          <h2 className="text-3xl font-semibold">Finishing up</h2>
+          <h2 className="text-3xl font-bold">Finishing up</h2>
           <p className="text-sm text-gray-600">
             Double-check everything looks OK before confirming.
           </p>
         </div>
 
-        <section className="w-full text-[13px] flex text-xl flex-col gap-3 bg-gray-100 border rounded p-4">
+        <section className="w-full flex text-base flex-col gap-3 bg-gray-100 border rounded p-4">
           <div>
             <section className="">
               <div className="flex justify-between items-center">
@@ -31,7 +31,7 @@ const Finishing = () => {
                   </div>
                   {/* CHANGE BUTTON HERE */}
                   <p
-                    className="text-gray-600 underline cursor-pointer"
+                    className="text-gray-600 text-sm underline cursor-pointer"
                     onClick={() => setStep("plan")}
                     role="button"
                     tabIndex={0}
@@ -53,10 +53,10 @@ const Finishing = () => {
               {addonPrices.map((a) => (
                 <div
                   key={a.name}
-                  className="flex justify-between items-center text-gray-600"
+                  className="flex justify-between items-cente text-sm text-gray-500"
                 >
                   <p>{a.name}</p>
-                  <p>
+                  <p className="text-gray-600 font-semibold">
                     +${a.price}/{billingCycle}
                   </p>
                 </div>
@@ -69,8 +69,8 @@ const Finishing = () => {
           <p className="text-gray-500">
             Total (per {isYearly ? "year" : "month"})
           </p>
-          <p className="text-xl font-bold text-purple-600">
-            ${total}/{billingCycle}
+          <p className="text-base font-bold text-purple-600">
+            +${total}/{billingCycle}
           </p>
         </div>
       </div>

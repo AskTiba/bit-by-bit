@@ -19,8 +19,8 @@ const Plan: React.FC = () => {
   };
 
   return (
-    <div className="p-6 flex flex-col gap-6 w-full">
-      <h2 className="text-xl font-semibold">Select your plan</h2>
+    <div className="p-6 flex flex-col gap-6 w-full ">
+      <h2 className="text-3xl font-bold">Select your plan</h2>
       <p className="text-gray-500">
         You have the option of monthly or yearly billing.
       </p>
@@ -39,7 +39,7 @@ const Plan: React.FC = () => {
         ))}
       </div>
 
-      <div className="flex justify-center items-center gap-4 text-sm mt-4">
+      <div className="flex justify-center lg:mr-10 items-center gap-4 text-sm mt-4">
         <span className={!isYearly ? "font-semibold" : "text-gray-400"}>
           Monthly
         </span>
