@@ -50,7 +50,7 @@ const AddOns: React.FC = () => {
                   : "border-gray-300 hover:bg-gray-100"
               }`}
             >
-              <div className="flex items-center gap-4">
+              <div className="flex items-center text-base gap-4">
                 <div onClick={(e) => e.stopPropagation()}>
                   <Checkbox
                     checked={isSelected}
@@ -59,11 +59,11 @@ const AddOns: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold">{a.name}</h3>
-                  <p className="text-gray-600">{a.description}</p>
+                  <p className="text-gray-600 text-sm">{a.description}</p>
                 </div>
               </div>
 
-              <p className="text-purple-600">
+              <p className="text-purple-600 font-semibold">
                 +${isYearly ? `${a.yearlyPrice}/yr` : `${a.monthlyPrice}/mo`}
               </p>
             </div>

@@ -7,7 +7,7 @@ import PersonalInfo from "./personalInfo";
 import Plan from "./plan";
 import Addons from "./add-ons";
 import Finishing from "./finishing";
-import Appreciation from "./apreciation";
+import Appreciation from "./appreciation";
 import { MyFormData } from "~/lib/types/formData";
 
 interface StepContentProps {

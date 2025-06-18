@@ -4,7 +4,7 @@ import checkmark from "../assets/images/icon-thank-you.svg";
 
 const apreciation = () => {
   return (
-    <main className="">
+    <main className="h-full my-auto w-full flex flex-col items-center justify-center">
       <div className="p-6 flex flex-1 h-full flex-col items-center justify-center gap-6">
         <Image src={checkmark} alt="checkmark" />
         <h2 className="text-2xl font-semibold">Thank you!</h2>
