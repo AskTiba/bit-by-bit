@@ -30,7 +30,7 @@ export const PlanCard = ({
           : "border border-gray-300"
       )}
     >
-      <Image src={icon} alt={name} />
+      <Image src={icon} alt={name} priority />
       <div>
         <h3 className="text-base font-medium">{name}</h3>
         <p className="text-sm text-gray-500">{price}</p>

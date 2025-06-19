@@ -69,12 +69,14 @@ const FormPage = () => {
           <Image
             src={desktop_sidebar}
             alt="Desktop sidebar"
+            priority
             className="hidden lg:flex w-full h-full object-contain p-3 rounded-xl"
           />
           {/* Mobile image */}
           <Image
             src={sidebar}
             alt="Mobile sidebar"
+            priority
             className="block lg:hidden h-full w-full object-cover"
           />
           <div className="absolute top-0 left-0 w-full h-full">
