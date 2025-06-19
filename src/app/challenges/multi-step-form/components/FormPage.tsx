@@ -91,7 +91,7 @@ const FormPage = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="col-span-2 relative lg:mx-12 lg:static flex flex-col bg-white rounded-xl -top-20 z-60 justify-between mx-3 h-full"
         >
-          <div className="lg:pt-5">
+          <div className="lg:pt-5 flex flex-col h-full">
             <StepContent
               activeStep={activeStep}
               register={register}
