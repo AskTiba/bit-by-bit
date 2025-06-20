@@ -1,6 +1,6 @@
 # Frontend Mentor - Multi-step form solution
 
-This is a solution to the [Multi-step form challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a solution to the [Multi-step form challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
 
@@ -36,83 +36,123 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![](../assets/images/theone.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Add solution URL here](https://github.com/AskTiba/bit-by-bit)
+- Live Site URL: [Add live site URL here](https://bit-by-bit-sigma.vercel.app/challenges/multi-step-form)
 
 ## My process
 
 ### Built with
 
 - Semantic HTML5 markup
-- CSS custom properties
+- Tailwind CSS custom properties
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- React Hook Forms
+- Zustand State Management
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+I have learned a few things above responsive design that i didn't know before. I also struggled a bit implementing Zustand state management for the very first time. I very much enjoyed the idea of persistance.
 
-To see how you can add code snippets, see below:
+```typescript
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
+import { MyFormData } from "../types/formData";
 
-```html
-<h1>Some HTML code I'm proud of</h1>
+type FormStep = "personal" | "plan" | "addons" | "finishing";
+
+type FormStore = {
+  formData: MyFormData;
+  updateFormData: (data: Partial<MyFormData>) => void;
+  resetFormData: () => void;
+  step: FormStep;
+  setStep: (step: FormStep) => void;
+};
+
+export const useFormStore = create<FormStore>()(
+  devtools(
+    persist(
+      (set) => ({
+        formData: {
+          name: "",
+          email: "",
+          phone: "",
+          plan: "",
+          planPrice: 0,
+          addons: [],
+          addonPrices: [],
+          isYearly: false,
+        },
+
+        step: "personal",
+
+        updateFormData: (data) =>
+          set(
+            (state) => ({
+              formData: {
+                ...state.formData,
+                ...data,
+              },
+            }),
+            false,
+            "form/updateFormData"
+          ),
+
+        resetFormData: () =>
+          set(
+            () => ({
+              formData: {
+                name: "",
+                email: "",
+                phone: "",
+                plan: "",
+                planPrice: 0,
+                addons: [],
+                addonPrices: [],
+                isYearly: false,
+              },
+              step: "personal",
+            }),
+            false,
+            "form/resetFormData"
+          ),
+
+        setStep: (step) => set(() => ({ step }), false, "form/setStep"),
+      }),
+      {
+        name: "FormStore", // 👈 shows up in localStorage and Redux Devtools
+      }
+    )
+  )
+);
 ```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
-
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+Well I experienced lots of challenges working on state management with Zustand, trying to use it with typescript and all. I intend to researching more on how to use and implement both Zustand and typescript.
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+Also the whole concept of responsive design is still abit challenging but hopefully with alot of research and practice in my future projects i will leaarn how to smoothly navigate the challenges i encontered here, then i will come back update this project.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- [React Hook Forms](https://www.react-hook-form.com/) - This helped me handle complex forms with validation in a cleaner, more performant way. I really liked how it minimizes re-renders by using uncontrolled components under the hood. The useForm hook pattern felt very ergonomic, and the integration with TypeScript was seamless. I’ll definitely use it as my default form solution going forward.
+- [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction) - Zustand helped me manage global state in a minimal and intuitive way without the boilerplate of Redux. I appreciated the simplicity of using hooks directly to access and update state. It’s especially powerful for local-first apps and when shared state doesn’t need a complex setup. I’ll be using this pattern for both React and React Native projects going forward.
+- [Tailwind documentaion](https://v2.tailwindcss.com/docs) - This is an amazing reference that helped me finally understand utility-first CSS. It made styling much more maintainable and scalable across my projects. I loved how Tailwind encourages design consistency by tying directly into a token-based design system. I'd recommend it to any frontend developer looking to move faster while keeping things clean and responsive.
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/) - This helped me deeply understand type safety and how to use interfaces, types, generics, and utility types like Partial or Pick. It really leveled up my confidence in writing robust, maintainable React code. I’d recommend it to anyone transitioning from JavaScript to TypeScript or aiming to write more predictable applications.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- Frontend Mentor - [@AskTiba](https://www.frontendmentor.io/profile/AskTiba)
+- Twitter - [@AskTiba](https://x.com/AskTiba)
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
+- I would like to thank Chingu who indirectly inspireed and motivated me to build this project. They requesteed me to bild a solo project as a proof and i did but later go motivated to work on more and so more will be worked on inthe future.
 
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- Am aslo gratetful to Frontend Mentor of availing the challenge with enough resources for anyone to attempt working on a solution. Despite the fact that i was working on the free plan i was able to enjoy meself as i was figuring out some solution to the challenges i faced.
