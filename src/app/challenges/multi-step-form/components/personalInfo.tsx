@@ -19,12 +19,12 @@ interface Props {
 const PersonalInfo: React.FC<Props> = ({ register, errors, setValue }) => {
   const { formData, updateFormData } = useFormStore();
 
-  // Input refs
+  // Refs for manual focus
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const phoneRef = useRef<HTMLInputElement | null>(null);
 
-  // Merged refs for RHF + manual focus
+  // Function to merge RHF and custom refs
   const mergeRefs = (
     fieldRef: React.MutableRefObject<HTMLInputElement | null>,
     registerReturn: UseFormRegisterReturn
@@ -35,22 +35,36 @@ const PersonalInfo: React.FC<Props> = ({ register, errors, setValue }) => {
     };
   };
 
+  // Set default values and autofocus on mount
   useEffect(() => {
-    // Set default values on mount
     if (formData) {
       setValue("name", formData.name);
       setValue("email", formData.email);
       setValue("phone", formData.phone.toString());
     }
 
-    // Focus name input initially
+    // Only focus on initial mount
     nameRef.current?.focus();
-  }, [formData, setValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const sync =
     (field: keyof MyFormData) => (e: React.ChangeEvent<HTMLInputElement>) => {
       updateFormData({ [field]: e.target.value });
     };
+
+  // Store register returns once
+  const nameRegister = register("name", { required: "Name is required" });
+  const emailRegister = register("email", {
+    required: "Email is required",
+    pattern: {
+      value: /^[^@ ]+@[^@ ]+\.[^@ ]+$/,
+      message: "Invalid email address",
+    },
+  });
+  const phoneRegister = register("phone", {
+    required: "Phone number is required",
+  });
 
   return (
     <div className="p-6 flex flex-col gap-6">
@@ -76,19 +90,19 @@ const PersonalInfo: React.FC<Props> = ({ register, errors, setValue }) => {
             </label>
             {errors.name && (
               <span className="hidden lg:inline text-xs text-red-500 font-medium">
-                {errors.name.message || "This field is required"}
+                {errors.name.message}
               </span>
             )}
           </div>
 
           <input
-            {...register("name", { required: "Name is required" })}
-            onChange={sync("name")}
-            ref={mergeRefs(
-              nameRef,
-              register("name", { required: "Name is required" })
-            )}
+            {...nameRegister}
             id="name"
+            onChange={(e) => {
+              nameRegister.onChange(e);
+              sync("name")(e);
+            }}
+            ref={mergeRefs(nameRef, nameRegister)}
             className={`w-full border p-2 rounded transition outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer ${
               errors.name ? "border-red-500" : "border-gray-300"
             }`}
@@ -115,31 +129,19 @@ const PersonalInfo: React.FC<Props> = ({ register, errors, setValue }) => {
             </label>
             {errors.email && (
               <span className="hidden lg:inline text-xs text-red-500 font-medium">
-                {errors.email.message || "Invalid email"}
+                {errors.email.message}
               </span>
             )}
           </div>
 
           <input
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[^@ ]+@[^@ ]+\.[^@ ]+$/,
-                message: "Invalid email address",
-              },
-            })}
-            onChange={sync("email")}
-            ref={mergeRefs(
-              emailRef,
-              register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[^@ ]+@[^@ ]+\.[^@ ]+$/,
-                  message: "Invalid email address",
-                },
-              })
-            )}
+            {...emailRegister}
             id="email"
+            onChange={(e) => {
+              emailRegister.onChange(e);
+              sync("email")(e);
+            }}
+            ref={mergeRefs(emailRef, emailRegister)}
             className={`w-full border p-2 rounded transition outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer ${
               errors.email ? "border-red-500" : "border-gray-300"
             }`}
@@ -166,19 +168,19 @@ const PersonalInfo: React.FC<Props> = ({ register, errors, setValue }) => {
             </label>
             {errors.phone && (
               <span className="hidden lg:inline text-xs text-red-500 font-medium">
-                {errors.phone.message || "This field is required"}
+                {errors.phone.message}
               </span>
             )}
           </div>
 
           <input
-            {...register("phone", { required: "Phone number is required" })}
-            onChange={sync("phone")}
-            ref={mergeRefs(
-              phoneRef,
-              register("phone", { required: "Phone number is required" })
-            )}
+            {...phoneRegister}
             id="phone"
+            onChange={(e) => {
+              phoneRegister.onChange(e);
+              sync("phone")(e);
+            }}
+            ref={mergeRefs(phoneRef, phoneRegister)}
             className={`w-full border p-2 rounded transition outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer ${
               errors.phone ? "border-red-500" : "border-gray-300"
             }`}
