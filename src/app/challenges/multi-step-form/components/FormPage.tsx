@@ -23,9 +23,11 @@ const FormPage = () => {
     register,
     handleSubmit,
     trigger,
-    formState: { errors },
-    setValue, // 👈 Add this
-  } = useForm<MyFormData>();
+    formState: { errors, isValid },
+    setValue,
+  } = useForm<MyFormData>({
+    mode: "onChange", // ensures isValid updates as the user types
+  });
 
   // Mark step visited when activeStep changes
   useEffect(() => {
@@ -107,6 +109,7 @@ const FormPage = () => {
               stepsLength={steps.length}
               onNext={onNext}
               onBack={onBack}
+              isValid={isValid}
             />
           </div>
         </form>
@@ -118,6 +121,7 @@ const FormPage = () => {
           stepsLength={steps.length}
           onNext={onNext}
           onBack={onBack}
+          isValid={isValid}
         />
       </div>
     </main>
