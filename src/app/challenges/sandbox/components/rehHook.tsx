@@ -37,8 +37,8 @@ const RefHook = () => {
   }, [setFocus]);
 
   return (
-    <div className="border-2 border-[#3d348b] rounded-md p-4 m-4 shadow-md">
-      <form onSubmit={onSubmit}>
+    <div className="">
+      <form className="my-8" onSubmit={onSubmit}>
         <div className="sm:w-1/2 sm:mx-auto flex flex-col gap-3">
           {/* 🔤 First Name Field */}
           <div className="flex flex-col gap-1">
