@@ -38,6 +38,21 @@ const projects = [
     bg: "from-pink-500 to-pink-700",
   },
   {
+    title: "Interactive-Comments-Section",
+    href: "./challenges/interactive-comments-section",
+    bg: "from-indigo-500 to-indigo-700",
+  },
+  {
+    title: "Ip-Address-Tracker",
+    href: "./challenges/ip-address-tracker",
+    bg: "from-indigo-500 to-indigo-700",
+  },
+  {
+    title: "Static-Job-Listing",
+    href: "./challenges/static-job-listing",
+    bg: "from-indigo-500 to-indigo-700",
+  },
+  {
     title: "Sandbox",
     href: "./challenges/sandbox",
     bg: "from-indigo-500 to-indigo-700",
