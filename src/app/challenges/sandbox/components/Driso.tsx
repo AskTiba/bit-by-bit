@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import sassie from "../assets/images/sassie.png";
+import sassie from "../assets/images/stinner1.png";
 
 // 🧠 Fun Profile Object (scalable + maintainable)
 const funProfile = {
