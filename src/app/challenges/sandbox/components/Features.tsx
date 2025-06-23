@@ -4,11 +4,11 @@ import { features } from "../lib/FeatureData";
 
 const Features = () => {
   return (
-    <section>
+    <section className="text-secondary">
       <header>
-        <h2>🔑 Feature List</h2>
+        <h2 className="font-bold text-muted  uppercase">Feature List</h2>
       </header>
-      <ul>
+      <ul className="flex flex-col gap-2 my-1">
         {features.map((feature, index) => (
           <FeatureItem
             key={index}

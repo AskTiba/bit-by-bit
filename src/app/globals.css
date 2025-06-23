@@ -120,3 +120,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+@theme {
+  --color-united: #b10303;
+  --color-background: #e9e8e3;
+  --color-foreground: #eaeff0;
+  --color-secondary: #111111;
+  --color-muted: #666666;
+}
