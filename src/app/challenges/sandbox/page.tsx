@@ -1,10 +1,11 @@
 import React from "react";
+import MatchFit from "./components/MatchFit";
 // import ReactHooks from "~/app/challenges/testing/components/reactHooks";
 // import RefHook from "~/app/challenges/sandbox/components/rehHook";
 // import LearnZustand from "./components/LearnZustand";
 // import Link from "next/link";
 // import ChessCard from "./components/ChessCard";
-import Driso from "./components/Driso";
+// import Driso from "./components/Driso";
 
 const Testing = () => {
   return (
@@ -19,7 +20,8 @@ const Testing = () => {
       {/* <RefHook /> */}
       {/* <LearnZustand /> */}
       {/* <ChessCard /> */}
-      <Driso />
+      {/* <Driso /> */}
+      <MatchFit />
     </div>
   );
 };

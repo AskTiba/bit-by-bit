@@ -27,6 +27,13 @@
       "~/multi-step-form/*": ["./src/app/challenges/multi-step-form/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src",
+    "scripts"
+  ],
   "exclude": ["node_modules"]
 }
