@@ -127,4 +127,8 @@
   --color-foreground: #eaeff0;
   --color-secondary: #111111;
   --color-muted: #666666;
+
+  --bg-hero: url("src/app/challenges/sandbox/assets/images/stinner1.png");
+  --bg-checker: url("/images/checkerboard.png");
+  --bg-noise: url("/images/noise.webp");
 }

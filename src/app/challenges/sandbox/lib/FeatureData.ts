@@ -38,13 +38,13 @@ export const features = [
       description:
         "Looks fire in selfies and match-day stories. Photogenic as hell.",
     },
-    {
-      title: "🎨 Season Exclusive Colorways",
-      description:
-        "Unique tones & trims that won’t be restocked. When it’s gone, it’s gone.",
-    },
-    {
-      title: "🎁 Comes in Collector’s Packaging",
-      description: "Not just a shirt. It’s an experience from box to body.",
-    },
+    // {
+    //   title: "🎨 Season Exclusive Colorways",
+    //   description:
+    //     "Unique tones & trims that won’t be restocked. When it’s gone, it’s gone.",
+    // },
+    // {
+    //   title: "🎁 Comes in Collector’s Packaging",
+    //   description: "Not just a shirt. It’s an experience from box to body.",
+    // },
   ];
