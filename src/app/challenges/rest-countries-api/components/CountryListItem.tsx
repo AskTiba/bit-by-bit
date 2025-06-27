@@ -19,12 +19,21 @@ const CountryListItem = ({
 }: Props) => {
   return (
     <Link href="#" className="w-full dark:bg-[#2B3945] rounded-sm">
-      <div className="w-full relative aspect-[4/3]">
+
+      {/* 🖼️ Flag image fills top portion */}
+      <div className="w-full aspect-video relative">
+
+   
+
         <Image
           src={flag}
           alt={`${name} flag`}
           fill
           className="object-cover rounded-t-sm"
+
+          sizes="(max-width: 768px) 100vw, 25vw"
+          priority
+
         />
       </div>
 
