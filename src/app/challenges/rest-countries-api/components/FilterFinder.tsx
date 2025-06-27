@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp } from "~/components/icons";
+import { ChevronDown } from "~/components/icons";
 import Search from "~/components/icons/Search";
 
 import {
@@ -14,15 +14,20 @@ import {
 const FilterFinder = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
-  const Icon = isDropDownOpen ? ChevronUp : ChevronDown;
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+
+  const regions = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
   return (
     <main>
       <section className="flex flex-col gap-6 md:flex-row md:justify-between my-5 md:my-8">
         {/* 🔍 Search */}
         <article>
-          <div className="flex items-center gap-4 border border-gray-400 rounded-md py-3 px-4">
-            <Search className="size-4 text-gray-900" strokeWidth={2} />
+          <div className="flex items-center gap-4 shadow-md dark:bg-[#2B3945] rounded-sm py-3 px-4">
+            <Search
+              className="size-4 text-gray-900 dark:text-white"
+              strokeWidth={2}
+            />
             <input
               className="md:w-2xs focus:outline-none bg-transparent w-full placeholder:text-gray-400"
               type="text"
@@ -32,24 +37,36 @@ const FilterFinder = () => {
         </article>
 
         {/* 🌍 Filter Dropdown */}
-        <article>
+        <article className="">
           <DropdownMenu open={isDropDownOpen} onOpenChange={setIsDropDownOpen}>
             <DropdownMenuTrigger asChild>
-              <button className="text-gray-950 justify-between w-1/2 flex items-center gap-4 md:w-full border border-gray-400 rounded-md py-3 px-4">
-                <p>Filter by Region</p>
-                <Icon className="size-4 text-gray-950" strokeWidth={2} />
+              <button
+                className="flex items-center bg-transparent justify-between gap-4 dark:bg-[#2B3945] text-sm text-gray-700 dark:text-white rounded-md shadow-md px-4 py-3 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-transparent"
+                aria-label="Filter by Region"
+              >
+                <span>{selectedRegion || "Filter by Region"}</span>
+                <ChevronDown
+                  className={`size-4 transform transition-transform duration-200 ${
+                    isDropDownOpen ? "rotate-180" : ""
+                  }`}
+                  strokeWidth={2}
+                />
               </button>
             </DropdownMenuTrigger>
+
             <DropdownMenuContent
-              className="text-gray-950 font-normal bg-transparent"
-              aria-label="Region"
+              className="w-[--radix-dropdown-menu-trigger-width] text-sm rounded-sm border-0 bg-[#E9E8E3] dark:bg-[#2B3945] dark:text-white shadow-lg ring-0 focus:outline-none"
               align="start"
             >
-              <DropdownMenuItem>Africa</DropdownMenuItem>
-              <DropdownMenuItem>America</DropdownMenuItem>
-              <DropdownMenuItem>Asia</DropdownMenuItem>
-              <DropdownMenuItem>Europe</DropdownMenuItem>
-              <DropdownMenuItem>Oceania</DropdownMenuItem>
+              {regions.map((region) => (
+                <DropdownMenuItem
+                  key={region}
+                  onSelect={() => setSelectedRegion(region)}
+                  className="cursor-pointer py-2 font-medium text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950 transition-colors duration-150 ease-in-out"
+                >
+                  {region}
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </article>
