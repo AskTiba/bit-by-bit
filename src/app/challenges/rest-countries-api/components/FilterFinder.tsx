@@ -20,7 +20,7 @@ const FilterFinder = () => {
 
   return (
     <main>
-      <section className="flex flex-col gap-6 md:flex-row md:justify-between my-5 md:my-8">
+      <section className="flex flex-col gap-6 md:flex-row md:justify-between py-5 md:py-8">
         {/* 🔍 Search */}
         <article>
           <div className="flex items-center gap-4 shadow-md dark:bg-[#2B3945] rounded-sm py-3 px-4">
