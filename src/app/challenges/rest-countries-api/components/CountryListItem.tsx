@@ -18,22 +18,19 @@ const CountryListItem = ({
   capital,
 }: Props) => {
   return (
-    <Link href="#" className="w-full dark:bg-[#2B3945] rounded-sm">
-
+    <Link
+      href={`/challenges/rest-countries-api/${encodeURIComponent(name)}`}
+      className="w-full dark:bg-[#2B3945] rounded-sm"
+    >
       {/* 🖼️ Flag image fills top portion */}
       <div className="w-full aspect-video relative">
-
-   
-
         <Image
           src={flag}
           alt={`${name} flag`}
           fill
           className="object-cover rounded-t-sm"
-
           sizes="(max-width: 768px) 100vw, 25vw"
           priority
-
         />
       </div>
 
