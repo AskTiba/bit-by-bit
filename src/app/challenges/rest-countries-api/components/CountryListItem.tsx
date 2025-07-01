@@ -5,9 +5,9 @@ import Image from "next/image";
 interface Props {
   flag: string;
   name: string;
-  population: number;
-  region: string;
-  capital: string | undefined;
+  population?: number;
+  region?: string;
+  capital?: string;
 }
 
 const CountryListItem = ({
@@ -20,7 +20,7 @@ const CountryListItem = ({
   return (
     <Link
       href={`/challenges/rest-countries-api/${encodeURIComponent(name)}`}
-      className="w-full dark:bg-[#2B3945] rounded-sm"
+      className="w-full dark:bg-[#2B3945] rounded-sm shadow hover:scale-[1.01] transition-transform"
     >
       {/* 🖼️ Flag image fills top portion */}
       <div className="w-full aspect-video relative">
@@ -34,16 +34,21 @@ const CountryListItem = ({
         />
       </div>
 
-      <h1 className="text-bold mt-5 px-6 text-xl">{name}</h1>
-      <div className="text-semibold flex flex-col gap-2 p-6 text-sm">
-        <p className="">
-          Population:<span className="text-[#7f8b97] ml-1">{population}</span>
+      <h2 className="font-bold mt-5 px-6 text-xl">{name}</h2>
+      <div className="font-semibold flex flex-col gap-2 p-6 text-sm">
+        <p>
+          Population:
+          <span className="text-[#7f8b97] ml-1">
+            {population?.toLocaleString() ?? "N/A"}
+          </span>
         </p>
-        <p className="">
-          Region:<span className="text-[#7f8b97] ml-1">{region}</span>
+        <p>
+          Region:
+          <span className="text-[#7f8b97] ml-1">{region ?? "N/A"}</span>
         </p>
-        <p className="">
-          Capital:<span className="text-[#7f8b97] ml-1">{capital}</span>
+        <p>
+          Capital:
+          <span className="text-[#7f8b97] ml-1">{capital ?? "N/A"}</span>
         </p>
       </div>
     </Link>
