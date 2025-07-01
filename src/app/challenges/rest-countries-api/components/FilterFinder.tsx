@@ -53,7 +53,7 @@ const FilterFinder: React.FC<FilterFinderProps> = ({
   }, [isDropDownOpen]);
 
   return (
-    <section className="flex flex-col gap-6 md:flex-row md:justify-between py-5 md:py-8">
+    <section className="flex flex-col gap-6 md:flex-row md:justify-between py-5 md:py-8 sticky top-16 z-10 bg-[#E9E8E3] dark:bg-[#202D36]">
       {/* 🔍 Search Input */}
       <article>
         <div className="relative shadow-md dark:bg-[#2B3945] rounded-sm py-3 px-4">
@@ -68,7 +68,7 @@ const FilterFinder: React.FC<FilterFinderProps> = ({
               placeholder="Search for a country..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-transparent placeholder:text-gray-400 focus:outline-none pr-8"
+              className="w-full bg-transparent placeholder:text-[#2B3945] dark:placeholder:text-[#E9E8E3] focus:outline-none pr-8"
             />
           </div>
 
