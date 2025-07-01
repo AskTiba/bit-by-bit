@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ChevronDown } from "~/components/icons";
 import Search from "~/components/icons/Search";
+import X from "~/components/icons/X";
 
 import {
   DropdownMenu,
@@ -16,6 +17,8 @@ const FilterFinder = () => {
 
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   const regions = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
   return (
@@ -23,16 +26,31 @@ const FilterFinder = () => {
       <section className="flex flex-col gap-6 md:flex-row md:justify-between py-5 md:py-8">
         {/* 🔍 Search */}
         <article>
-          <div className="flex items-center gap-4 shadow-md dark:bg-[#2B3945] rounded-sm py-3 px-4">
-            <Search
-              className="size-4 text-gray-900 dark:text-white"
-              strokeWidth={2}
-            />
-            <input
-              className="md:w-2xs focus:outline-none bg-transparent w-full placeholder:text-gray-400"
-              type="text"
-              placeholder="Search for a country..."
-            />
+          <div className="relative shadow-md dark:bg-[#2B3945] rounded-sm py-3 px-4">
+            <div className="flex items-center gap-2">
+              <Search
+                className="size-5 text-gray-900 dark:text-white"
+                strokeWidth={2}
+              />
+
+              <input
+                type="text"
+                placeholder="Search for a country..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full bg-transparent placeholder:text-gray-400 focus:outline-none pr-8" // 👈 padding for the X
+              />
+            </div>
+
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm("")}
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full bg-transparent dark:bg-[#202D36] hover:scale-110 transition"
+                aria-label="Clear input"
+              >
+                <X className="size-4 text-gray-900 dark:text-white" />
+              </button>
+            )}
           </div>
         </article>
 
