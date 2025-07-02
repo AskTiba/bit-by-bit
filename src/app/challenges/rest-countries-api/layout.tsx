@@ -9,7 +9,7 @@ export default function CountriesLayout({
 }) {
   return (
     <ThemeWrapper>
-      <div className="min-h-screen text-gray-900 dark:text-white">
+      <div className="min-h-screen text-gray-900 dark:text-white bg-[#E9E8E3] dark:bg-[#202D36]">
         <Header />
         {children}
       </div>

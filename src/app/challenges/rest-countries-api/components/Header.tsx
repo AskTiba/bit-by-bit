@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     // 🌐 Full width background area
-    <header className="w-full dark:bg-[#2B3945] text-gray-950  dark:text-white  shadow-md">
+    <header className="w-full bg-[#E9E8E3] dark:bg-[#2B3945] text-gray-950  dark:text-white  shadow-md sticky top-0 z-10">
       <div className="flex items-center justify-between py-5 px-4 sm:px-6 md:px-10 lg:px-20 mx-auto max-w-7xl font-semibold">
         <p>Where in the world?</p>
         <article className="flex items-center gap-2">
